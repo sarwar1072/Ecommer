@@ -1,0 +1,58 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@section PageStyle
+{
+    <link rel="stylesheet" href="/Admin/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
+}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <table id="Product" class="table table table-striped table-bordered">
+                    <thead class="thead-dark">
+                        <tr class="table-info">
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>ISBN</th>
+                            <th>Author</th>
+                            <th>Price</th>
+                            <th>ImageUrl</th>
+                            <th>Category</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tfoot>
+                        <tr class="table-info">
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>ISBN</th>
+                            <th>Author</th>
+                            <th>Price</th>
+                            <th>ImageUrl</th>
+                            <th>Category</th>
+                            <th>Action</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+    <!-- /.col -->
+</div>
+@section PageScript{
+
+    <script src="/Admin/plugins/datatables/jquery.dataTables.js"></script>
+    <script src="/Admin/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+
+}
+
+
+
+
