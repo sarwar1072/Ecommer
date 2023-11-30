@@ -9,8 +9,7 @@ namespace Ecommerce.Web.Models.CategoryModelFolder
         private ICategoryService _categoryService;
         protected ILifetimeScope? _lifetimeScope;
 
-        public CategoryVM() { }
-       
+        public CategoryVM() { }     
         public CategoryVM(ICategoryService categoryService)
         {
                 _categoryService = categoryService; 

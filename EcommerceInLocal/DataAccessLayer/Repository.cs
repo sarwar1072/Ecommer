@@ -135,7 +135,7 @@ namespace DataAccessLayer
                     return (result.ToList(), total, totalDisplay);
             }
         }
-
+        //Expression<Func<TEntity, bool>> filter = null=(use for search test)
         public virtual (IList<TEntity> data, int total, int totalDisplay) GetDynamic(
             Expression<Func<TEntity, bool>> filter = null,
             string orderBy = null,

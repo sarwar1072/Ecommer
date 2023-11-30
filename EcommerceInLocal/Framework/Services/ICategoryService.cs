@@ -10,6 +10,7 @@ namespace Framework.Services
 {
     public interface ICategoryService
     {
+        void AddCategory(CategoryBO categoryBO);
         (IList<CategoryBO> category, int total, int totalDisplay) GetCategory(int pageindex, int pagesize,
                                                                               string searchText, string orderBy);
     }

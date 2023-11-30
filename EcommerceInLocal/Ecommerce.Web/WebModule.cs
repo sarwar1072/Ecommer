@@ -11,9 +11,9 @@ namespace Ecommerce.Web
                 .AsSelf()
                 .InstancePerLifetimeScope();
 
-            //builder.RegisterType<LoginModel>()
-            //    .AsSelf()
-            //    .InstancePerLifetimeScope();
+            builder.RegisterType<CreateCategory>()
+                .AsSelf()
+                .InstancePerLifetimeScope();
 
             //builder.RegisterType<RegistrationConfirmationModel>()
             //    .AsSelf()

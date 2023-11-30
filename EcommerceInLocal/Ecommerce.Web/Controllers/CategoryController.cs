@@ -15,10 +15,25 @@ namespace Ecommerce.Web.Controllers
         }
         public IActionResult Index()
         {
-            var model = _lifetime.Resolve<CategoryVM>();
+            var model = _lifetime.Resolve<CreateCategory>();
             return View(model);
         }
+        public IActionResult Add()
+        {
+            var model= _lifetime.Resolve<CreateCategory>();
+            return View(model); 
+        }
+        [HttpPost]
+        public IActionResult Add(CreateCategory model)
+        {
+            model.ResolveDependency(_lifetime);
+            if (ModelState.IsValid)
+            {
 
+                model.Add();
+            }
+            return View(model);
+        }
         public IActionResult GetCategory()
         {
             var tableModel = new DataTablesAjaxRequestModel(Request);
