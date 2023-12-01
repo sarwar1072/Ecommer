@@ -31,13 +31,14 @@ namespace Ecommerce.Web.Models.CategoryModelFolder
 
         public void Add()
         {
-            var category = new CategoryBO()
+            var category2 = new CategoryBO()
             {
                 Name = Name,    
-                DisplayOrder=DisplayOrder,
+                DisplayOrder = DisplayOrder,
                 CreatedDate = CreatedDate,
             };
-            _categoryService.AddCategory(category);
+           // var category1=_mapper.Map<CategoryBO>(category2); 
+            _categoryService.AddCategory(category2);
         }
 
 

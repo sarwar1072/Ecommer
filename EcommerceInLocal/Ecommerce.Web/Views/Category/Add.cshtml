@@ -5,10 +5,17 @@
 
 <h1>Add</h1>
 
+
 <div class="row">
     <div class="col-8">
         <div class="card">
             <div class="card-header">
+                @if (ViewBag.Message != null)
+                {
+                    <div class="alert-success" role="alert">
+                        <p>@ViewBag.Message</p>
+                    </div>
+                }
             </div>
             <form asp-action="Add" method="post">
                 <div class="card-body">
@@ -46,8 +53,8 @@
     </div>
 </div>
 
-@section PageScript
-                        {
+@section PageScript{                    
+
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }

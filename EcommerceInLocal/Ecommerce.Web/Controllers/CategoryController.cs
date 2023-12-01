@@ -9,7 +9,7 @@ namespace Ecommerce.Web.Controllers
     public class CategoryController : Controller
     {
         private ILifetimeScope _lifetime;
-        public CategoryController(ILifetimeScope lifetime)
+       public CategoryController(ILifetimeScope lifetime)
         {
             _lifetime = lifetime;
         }
@@ -31,6 +31,8 @@ namespace Ecommerce.Web.Controllers
             {
 
                 model.Add();
+                ViewBag.Message = "Category created !";
+                //return RedirectToAction("Index");
             }
             return View(model);
         }
