@@ -10,12 +10,13 @@
     <div class="col-8">
         <div class="card">
             <div class="card-header">
-                @if (ViewBag.Message != null)
+                @* @if (ViewBag.Message != null)
                 {
-                    <div class="alert-success" role="alert">
-                        <p>@ViewBag.Message</p>
-                    </div>
-                }
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>@ViewBag.Message!</strong> 
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>                 
+                } *@
             </div>
             <form asp-action="Add" method="post">
                 <div class="card-body">

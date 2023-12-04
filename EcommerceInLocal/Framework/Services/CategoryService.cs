@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Framework.Exceptions;
 
 namespace Framework.Services
 {
@@ -24,7 +25,7 @@ namespace Framework.Services
             var entityCount=_ecommerceUnitOf.CategoryRepository.GetCount(c=>c.Name==categoryBO.Name);
             if(entityCount > 0)
             {
-                throw new Exception("Category name already exist");
+                throw new DuplicationException("Same title is exist",nameof(categoryBO.Name));
             }
             var mapEntity=_mapper.Map<CategoryEO>(categoryBO);  
             _ecommerceUnitOf.CategoryRepository.Add(mapEntity);

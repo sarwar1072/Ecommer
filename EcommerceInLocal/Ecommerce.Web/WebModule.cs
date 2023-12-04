@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Ecommerce.Web.Models;
 using Ecommerce.Web.Models.CategoryModelFolder;
 
 namespace Ecommerce.Web
@@ -15,13 +16,13 @@ namespace Ecommerce.Web
                 .AsSelf()
                 .InstancePerLifetimeScope();
 
-            //builder.RegisterType<RegistrationConfirmationModel>()
-            //    .AsSelf()
-            //    .InstancePerLifetimeScope();
+            builder.RegisterType<ResponseModel>()
+                .AsSelf()
+                .InstancePerLifetimeScope();
 
-            //builder.RegisterType<RegisterModel>()
-            //    .AsSelf()
-            //    .InstancePerLifetimeScope();
+            builder.RegisterType<DashboardModel>()
+                .AsSelf()
+                .InstancePerLifetimeScope();
 
             //builder.RegisterType<PostLayoutModel>()
             //    .AsSelf()

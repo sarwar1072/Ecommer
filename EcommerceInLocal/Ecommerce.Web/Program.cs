@@ -35,8 +35,10 @@ namespace Ecommerce.Web
           //  for solving routing errorrouing 
             builder.Services.AddControllersWithViews();
 
-            //Serilog Configuration
-            builder.Host.UseSerilog((ctx, lc) => lc
+
+
+        //Serilog Configuration
+        builder.Host.UseSerilog((ctx, lc) => lc
                 .MinimumLevel.Debug()
                 .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
                 .Enrich.FromLogContext()
@@ -59,17 +61,32 @@ namespace Ecommerce.Web
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
+          //  new added for session 
+           builder.Services.AddHttpContextAccessor();
+
             //builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
             //.AddEntityFrameworkStores<ApplicationDbContext>();
             //builder.Services.AddControllersWithViews();
             //builder.Services
             //    .AddIdentity<ApplicationUser, Role>()
             //    .AddEntityFrameworkStores<ApplicationDbContext>()
-                //.AddUserManager<UserManager>()
-                //.AddRoleManager<RoleManager>()
-                //.AddSignInManager<SignInManager>()
-                //.AddDefaultTokenProviders();
+            //.AddUserManager<UserManager>()
+            //.AddRoleManager<RoleManager>()
+            //.AddSignInManager<SignInManager>()
+            //.AddDefaultTokenProviders();
 
+
+            //for session 
+            builder.Services.AddDistributedMemoryCache();
+            builder.Services.AddSession(options =>
+            {
+                // Set a short timeout for easy testing.
+                options.IdleTimeout = TimeSpan.FromSeconds(40);
+                options.Cookie.HttpOnly = true;
+                // Make the session cookie essential
+                options.Cookie.IsEssential = true;
+            });
+            //for session 
             builder.Services.Configure<IdentityOptions>(options =>
             {
                 // Password settings.
@@ -129,7 +146,8 @@ namespace Ecommerce.Web
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "/{controller=Home}/{action=Index}/{id?}");
+                pattern: "/{controller=Category}/{action=Index}/{id?}");
+            app.UseSession();
 
             app.Run();
         }

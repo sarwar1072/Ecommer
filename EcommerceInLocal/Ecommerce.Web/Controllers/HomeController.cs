@@ -15,7 +15,8 @@ namespace Ecommerce.Web.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var model = new DashboardModel();
+            return View(model);
         }
 
         public IActionResult Privacy()

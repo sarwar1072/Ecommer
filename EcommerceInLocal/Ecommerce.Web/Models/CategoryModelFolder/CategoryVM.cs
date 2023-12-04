@@ -1,20 +1,21 @@
 ﻿using Autofac;
 using AutoMapper;
 using Framework.Services;
+using Microsoft.AspNetCore.Http;
 
 namespace Ecommerce.Web.Models.CategoryModelFolder
 {
     public class CategoryVM
     {
         private ICategoryService _categoryService;
-        protected ILifetimeScope? _lifetimeScope;
-
+        private IMapper _mapper;
+        private ILifetimeScope _lifetimeScope;
         public CategoryVM() { }     
-        public CategoryVM(ICategoryService categoryService)
+        public CategoryVM(ICategoryService categoryService, IMapper mapper) 
         {
                 _categoryService = categoryService; 
         }
-        internal void ResolveDependancy(ILifetimeScope lifetimeScope)
+        public  void ResolveDependency(ILifetimeScope lifetimeScope)
         {
             _lifetimeScope = lifetimeScope;
             _categoryService=_lifetimeScope.Resolve<ICategoryService>();
