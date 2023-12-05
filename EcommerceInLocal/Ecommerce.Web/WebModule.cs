@@ -9,12 +9,12 @@ namespace Ecommerce.Web
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<CategoryVM>()
-                .AsSelf()
-                .InstancePerLifetimeScope();
+                .AsSelf();
+                
 
             builder.RegisterType<CreateCategory>()
-                .AsSelf()
-                .InstancePerLifetimeScope();
+                .AsSelf();
+                
 
             builder.RegisterType<ResponseModel>()
                 .AsSelf()
@@ -24,9 +24,9 @@ namespace Ecommerce.Web
                 .AsSelf()
                 .InstancePerLifetimeScope();
 
-            //builder.RegisterType<PostLayoutModel>()
-            //    .AsSelf()
-            //    .InstancePerLifetimeScope();
+            builder.RegisterType<EditCategory>()
+                .AsSelf();
+                
 
             //builder.RegisterType<QuestionCreateModel>()
             //    .AsSelf()

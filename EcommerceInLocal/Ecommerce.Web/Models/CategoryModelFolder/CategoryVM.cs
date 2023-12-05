@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Ecommerce.Web.Models.CategoryModelFolder
 {
-    public class CategoryVM
+    public class CategoryVM: IDisposable
     {
         private ICategoryService _categoryService;
         private IMapper _mapper;
@@ -15,6 +15,12 @@ namespace Ecommerce.Web.Models.CategoryModelFolder
         {
                 _categoryService = categoryService; 
         }
+
+        public void Dispose()
+        {
+            _categoryService.Dispose();
+        }
+
         public  void ResolveDependency(ILifetimeScope lifetimeScope)
         {
             _lifetimeScope = lifetimeScope;

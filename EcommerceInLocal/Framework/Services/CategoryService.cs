@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Framework.Exceptions;
+using System.Net.WebSockets;
 
 namespace Framework.Services
 {
@@ -31,6 +32,42 @@ namespace Framework.Services
             _ecommerceUnitOf.CategoryRepository.Add(mapEntity);
             _ecommerceUnitOf.Save();
 
+        }
+        public void Dispose()
+        {
+            _ecommerceUnitOf.Dispose();
+        }
+        public void Edit(CategoryBO categoryBO)
+        {
+            var count=_ecommerceUnitOf.CategoryRepository.GetCount(c=>c.Name == categoryBO.Name);
+            if (count > 0)
+                 throw new DuplicationException("Already exist", nameof(categoryBO.Name));
+
+            var entity = _ecommerceUnitOf.CategoryRepository.Get(x=>x.Id==categoryBO.Id).FirstOrDefault();
+            AssignToEntity(categoryBO, entity);
+            _ecommerceUnitOf.CategoryRepository.Edit(entity); 
+            _ecommerceUnitOf.Save();    
+        }
+        private CategoryEO AssignToEntity(CategoryBO categoryBO,CategoryEO categoryEO)
+        {    
+            categoryEO.Id=categoryBO.Id;
+            categoryEO.Name = categoryBO.Name;
+            categoryEO.DisplayOrder = categoryBO.DisplayOrder;
+            categoryEO.CreatedDate=categoryBO.CreatedDate;
+            return categoryEO;
+        }   
+        public void Delete(int id)
+        {
+            var entity=_ecommerceUnitOf.CategoryRepository.GetById(id);
+            _ecommerceUnitOf.CategoryRepository.Remove(entity); 
+            _ecommerceUnitOf.Save();
+        }
+        public CategoryBO Get(int id)
+        {
+             var entityObj=_ecommerceUnitOf.CategoryRepository.GetById(id);
+            var businessObj = _mapper.Map<CategoryBO>(entityObj);
+            return businessObj;
+            //return entityObj;
         }
         public (IList<CategoryBO> category, int total, int totalDisplay) GetCategory(int pageindex, int pagesize,
                                                                               string searchText, string orderBy)

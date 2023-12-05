@@ -11,6 +11,7 @@ namespace DataAccessLayer
         where TEntity : class, IEntity<TKey>
         where TContext : DbContext
     {
+         IList<TEntity> GetAsync(Expression<Func<TEntity, bool>> filter, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = null);
         void Add(TEntity entity);
         void Remove(TKey id);
         void Remove(IEnumerable<TEntity> entity);

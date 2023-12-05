@@ -59,7 +59,7 @@
             </div>
             <div class="modal-body">
                 <p>Are you sure, you want to delete?</p>
-                <form id="deleteForm" action="/admin/CoverType/DeleteCover" method="post">
+                <form id="deleteForm" action="/Category/Delete" method="post">
                     @Html.AntiForgeryToken()
                     <input type="hidden" id="deleteId" value="" name="id" />
                 </form>
@@ -94,7 +94,7 @@
                         "targets": 3,
                         "width": "20%",
                         "render": function (data, type, row) {
-                            return `<button type="submit" class="btn btn-info btn-sm" onclick="window.location.href='/admin/CoverType/EditCover/${data}'" value='${data}'>
+                            return `<button type="submit" class="btn btn-info btn-sm" onclick="window.location.href='/Category/Edit/${data}'" value='${data}'>
                                                                     <i class="fas fa-pencil-alt">
                                                                     </i>
                                                                     Edit
