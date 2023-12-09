@@ -2,7 +2,6 @@
 using AutoMapper;
 using Framework.Services;
 using CategoryBO = Framework.BusinessObj.Category;
-using CategoryEO = Framework.Entity.Category;
 using Framework;
 
 namespace Ecommerce.Web.Models.CategoryModelFolder

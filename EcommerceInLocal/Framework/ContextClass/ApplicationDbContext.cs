@@ -1,5 +1,4 @@
-﻿using Framework.BusinessObj.Membership;
-using Framework.Entity;
+﻿using Framework.Entity;
 using Framework.Entity.Membership;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -54,9 +53,8 @@ namespace Framework.ContextClass
 
        public DbSet<ApplicationUser>? ApplicationUsers { get; set; }
         public DbSet<Category>? Categories { get; set; }
-
-        //public DbSet<Question>? Questions { get; set; }
-        //public DbSet<Answer>? Answers { get; set; }
+        public DbSet<Cover>? Covers { get; set; }
+        public DbSet<Product>? Products { get; set; }
         //public DbSet<Comment>? Comments { get; set; }
         //public DbSet<Tag>? Tags { get; set; }
         //public DbSet<Vote> Votes { get; set; }

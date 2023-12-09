@@ -6,7 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CategoryEO = Framework.Entity.Category;
-
+using CoverBO = Framework.BusinessObj.Cover;
+using CoverEO = Framework.Entity.Cover;
 namespace Framework.Profiles
 {
     public class InfrastructureProfile:Profile
@@ -14,8 +15,8 @@ namespace Framework.Profiles
         public InfrastructureProfile()
         {
             CreateMap<CategoryBO, CategoryEO>().ReverseMap();
-            //CreateMap<Answer, AnswerEO>().ReverseMap();
-            //CreateMap<Comment, CommentEO>().ReverseMap();
+            CreateMap<CoverBO, CoverEO>().ReverseMap();
+
         }
     }
 }

@@ -41,6 +41,10 @@ namespace Framework
             builder.RegisterType<CategoryService>().As<ICategoryService>()
                 .InstancePerLifetimeScope();
 
+            builder.RegisterType<CoverRepository>().As<ICoverRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<CoverService>().As<ICoverService>().InstancePerLifetimeScope();
+            builder.RegisterType<ProductRepository>().As<IProductRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<ProductServices>().As<IProductServices>().InstancePerLifetimeScope();
 
             base.Load(builder);
         }

@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using Ecommerce.Web.Models;
 using Ecommerce.Web.Models.CategoryModelFolder;
+using Ecommerce.Web.Models.CoverModelFolder;
 
 namespace Ecommerce.Web
 {
@@ -26,15 +27,10 @@ namespace Ecommerce.Web
 
             builder.RegisterType<EditCategory>()
                 .AsSelf();
-                
 
-            //builder.RegisterType<QuestionCreateModel>()
-            //    .AsSelf()
-            //    .InstancePerLifetimeScope();
-
-            //builder.RegisterType<QuestionEditModel>()
-            //    .AsSelf()
-            //    .InstancePerLifetimeScope();
+            builder.RegisterType<CoverVM>().AsSelf();
+            builder.RegisterType<CreateCover>().AsSelf();
+            builder.RegisterType<EditCover>().AsSelf();
 
             //builder.RegisterType<AnswerCreateModel>()
             //    .AsSelf()

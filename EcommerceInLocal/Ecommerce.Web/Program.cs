@@ -62,7 +62,7 @@ namespace Ecommerce.Web
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
           //  new added for session 
-           builder.Services.AddHttpContextAccessor();
+         builder.Services.AddHttpContextAccessor();
 
             //builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
             //.AddEntityFrameworkStores<ApplicationDbContext>();
@@ -139,7 +139,7 @@ namespace Ecommerce.Web
 
             app.UseAuthentication();
             app.UseAuthorization();  //use when need idntity
-
+            app.UseSession();
             //app.MapControllerRoute(
             //    name: "areas",
             //    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
@@ -147,7 +147,7 @@ namespace Ecommerce.Web
             app.MapControllerRoute(
                 name: "default",
                 pattern: "/{controller=Category}/{action=Index}/{id?}");
-            app.UseSession();
+           
 
             app.Run();
         }

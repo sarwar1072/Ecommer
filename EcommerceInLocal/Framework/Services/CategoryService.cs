@@ -45,6 +45,7 @@ namespace Framework.Services
 
             var entity = _ecommerceUnitOf.CategoryRepository.Get(x=>x.Id==categoryBO.Id).FirstOrDefault();
             AssignToEntity(categoryBO, entity);
+
             _ecommerceUnitOf.CategoryRepository.Edit(entity); 
             _ecommerceUnitOf.Save();    
         }
@@ -54,6 +55,7 @@ namespace Framework.Services
             categoryEO.Name = categoryBO.Name;
             categoryEO.DisplayOrder = categoryBO.DisplayOrder;
             categoryEO.CreatedDate=categoryBO.CreatedDate;
+
             return categoryEO;
         }   
         public void Delete(int id)

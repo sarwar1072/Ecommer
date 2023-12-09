@@ -11,5 +11,8 @@ namespace Framework.UnitOfWorkForApp
     public interface IEcommerceUnitOfWork:IUnitOfWork
     {
          ICategoryRepository CategoryRepository { get;  }
+         ICoverRepository CoverRepository { get;  }
+        IProductRepository ProductRepository {  get; }  
+
     }
 }

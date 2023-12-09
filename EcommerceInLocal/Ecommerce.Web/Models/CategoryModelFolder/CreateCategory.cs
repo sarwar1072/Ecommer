@@ -6,7 +6,7 @@ using Framework;
 
 namespace Ecommerce.Web.Models.CategoryModelFolder
 {
-    public class CreateCategory: IDisposable
+    public class CreateCategory : IDisposable
     {
         private ICategoryService _categoryService;
         private IMapper _mapper;

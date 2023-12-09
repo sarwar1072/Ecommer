@@ -62,6 +62,7 @@ namespace Ecommerce.Web.Controllers
         public IActionResult Edit(EditCategory editCategory)
         {
             editCategory.ResolveDependency(_lifetime);
+            
             if (ModelState.IsValid)
             {
                 try

@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Ecommerce.Web.Models.CategoryModelFolder
 {
-    public class CategoryVM: IDisposable
+    public class CategoryVM : IDisposable
     {
         private ICategoryService _categoryService;
         private IMapper _mapper;

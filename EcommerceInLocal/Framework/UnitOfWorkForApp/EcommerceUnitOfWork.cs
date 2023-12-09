@@ -12,10 +12,16 @@ namespace Framework.UnitOfWorkForApp
     public class EcommerceUnitOfWork:UnitOfWork, IEcommerceUnitOfWork
     {
         public ICategoryRepository CategoryRepository { get; private set; }
+        public ICoverRepository CoverRepository {  get; private set; } 
+        public IProductRepository ProductRepository { get; private set; }   
         public EcommerceUnitOfWork(ApplicationDbContext dbContext, 
-            ICategoryRepository categoryRepository) :base(dbContext)
+            ICategoryRepository categoryRepository,
+            ICoverRepository coverRepository,
+            IProductRepository productRepository) :base(dbContext)
         {
             CategoryRepository = categoryRepository;
+            CoverRepository = coverRepository;
+            ProductRepository = productRepository;
         }
     }
 }
