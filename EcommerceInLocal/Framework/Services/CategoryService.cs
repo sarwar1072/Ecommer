@@ -78,14 +78,11 @@ namespace Framework.Services
             if (string.IsNullOrWhiteSpace(searchText))
             {
                 result = _ecommerceUnitOf.CategoryRepository.GetDynamic(null, orderBy, "", pageindex, pagesize, true);
-
             }
             else
             {
                 result = _ecommerceUnitOf.CategoryRepository.GetDynamic(x => x.Name == searchText, orderBy, "", pageindex, pagesize, true);
-
             }
-
             var listOfEntity = new List<CategoryBO>();
             foreach (var category in result.data)
             {

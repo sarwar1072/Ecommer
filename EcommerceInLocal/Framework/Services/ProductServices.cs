@@ -42,18 +42,32 @@ namespace Framework.Services
             (IList<ProductEO> data, int total, int totalDisplay) result = (null, 0, 0);
             if (string.IsNullOrWhiteSpace(searchText))
             {
-                result = _ecommerceUnitOf.ProductRepository.GetDynamic(null, orderBy, "", pageindex, pagesize, true);
+                result = _ecommerceUnitOf.ProductRepository.GetDynamic(null, orderBy, "Category", pageindex, pagesize, true);
             }
             else
             {
-                result = _ecommerceUnitOf.ProductRepository.GetDynamic(x => x.Title == searchText, orderBy, "", pageindex, pagesize, true);
+                result = _ecommerceUnitOf.ProductRepository.GetDynamic(x => x.Title == searchText, orderBy, "Category", pageindex, pagesize, true);
             }
             var listOfEntity = new List<ProductBO>();
             foreach (var product in result.data)
             {
+              // var obj= AssignProductBO(product);
                 listOfEntity.Add(_mapper.Map<ProductBO>(product));
             }
             return (listOfEntity, result.total, result.totalDisplay);
+        }
+        private ProductBO AssignProductBO(ProductEO productEO)
+        {
+            var newObj = new ProductBO();
+            //var catObj=new CategoryBO();
+            //newObj.Category = catObj;
+            newObj.Title= productEO.Title;  
+            newObj.Description= productEO.Description;
+            newObj.ISBN= productEO.ISBN;    
+            newObj.Author= productEO.Author;    
+            newObj.Price= productEO.Price;
+            newObj.Category.Name = productEO.Category.Name;
+            return newObj;  
         }
         public IList<CategoryBO> GetCategories()
         {

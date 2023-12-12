@@ -35,8 +35,6 @@ namespace Ecommerce.Web
           //  for solving routing errorrouing 
             builder.Services.AddControllersWithViews();
 
-
-
         //Serilog Configuration
         builder.Host.UseSerilog((ctx, lc) => lc
                 .MinimumLevel.Debug()
@@ -51,10 +49,7 @@ namespace Ecommerce.Web
             //    options.ListenLocalhost(49172, opts => opts.UseHttps());
             //    //get your localhost htttps port number from launch settings
             //});
-
             builder.WebHost.UseUrls("http://*:80");
-
-
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connectionString, m => m.MigrationsAssembly(assemblyName)));
 
@@ -75,13 +70,12 @@ namespace Ecommerce.Web
             //.AddSignInManager<SignInManager>()
             //.AddDefaultTokenProviders();
 
-
             //for session 
             builder.Services.AddDistributedMemoryCache();
             builder.Services.AddSession(options =>
             {
                 // Set a short timeout for easy testing.
-                options.IdleTimeout = TimeSpan.FromSeconds(40);
+                options.IdleTimeout = TimeSpan.FromMinutes(40);
                 options.Cookie.HttpOnly = true;
                 // Make the session cookie essential
                 options.Cookie.IsEssential = true;
@@ -117,9 +111,7 @@ namespace Ecommerce.Web
                 options.AccessDeniedPath = "/Account/Login";
                 options.SlidingExpiration = true;
             });
-
             var app = builder.Build();
-
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
@@ -131,15 +123,14 @@ namespace Ecommerce.Web
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            app.UseSession();
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
-
             app.UseAuthentication();
             app.UseAuthorization();  //use when need idntity
-            app.UseSession();
             //app.MapControllerRoute(
             //    name: "areas",
             //    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
@@ -148,7 +139,6 @@ namespace Ecommerce.Web
                 name: "default",
                 pattern: "/{controller=Category}/{action=Index}/{id?}");
            
-
             app.Run();
         }
     }

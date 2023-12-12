@@ -9,6 +9,20 @@ namespace Ecommerce.Web.Models
     {
         public string Message { set; get; }
         public ResponseType Type { get; set; }
+        //public ResponseModel(string mesage,ResponseType response)
+        //{
+        //    if(response == ResponseType.Success) 
+        //    { 
+        //        Message = mesage;   
+        //    }
+        //    else
+        //    {
+        //        Message = mesage;
+        //    }
+                
+        //}
 
     }
+   
+
 }

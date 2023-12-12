@@ -9,8 +9,8 @@ namespace Ecommerce.Web.Models.ProductModelFolder
         private IProductServices _services;
         public ProductModel() { }
         
-        public ProductModel(IMapper mapper, IHttpContextAccessor httpContextAccessor, 
-            IProductServices services) :base(mapper, httpContextAccessor)
+        public ProductModel(IMapper mapper ,IProductServices services, IHttpContextAccessor httpContextAccessor) 
+            :base(mapper, httpContextAccessor)
         {
             _services = services;   
         }
@@ -40,11 +40,12 @@ namespace Ecommerce.Web.Models.ProductModelFolder
                             record.ISBN,
                             record.Author,
                             record.Price.ToString(),
-                            record.ImageUrl,
+                           // record.ImageUrl,
                             record.Category.Name,
                             record.Id.ToString()
                         }).ToArray()
             };
+
         }
 
     }

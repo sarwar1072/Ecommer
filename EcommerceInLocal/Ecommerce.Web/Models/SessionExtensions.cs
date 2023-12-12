@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace Framework
+namespace Ecommerce.Web.Models
 {
     public static class SessionExtensions
     {

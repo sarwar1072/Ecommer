@@ -45,8 +45,10 @@
         <main role="main" class="pb-3">
 
             <partial name="_ResponsePartial" />
-
-            @RenderBody()
+ 
+@*             <partial name="_ActionMessage" model="@Model.Response2" />
+ *@  
+              @RenderBody()
         </main>
     </div>
 
@@ -76,7 +78,5 @@
 
         });
     </script>
- 
- 
 </body>
 </html>

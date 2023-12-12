@@ -2,6 +2,8 @@
 using Ecommerce.Web.Models;
 using Ecommerce.Web.Models.CategoryModelFolder;
 using Ecommerce.Web.Models.CoverModelFolder;
+using Ecommerce.Web.Models.ProductModelFolder;
+using Framework.Services;
 
 namespace Ecommerce.Web
 {
@@ -32,7 +34,17 @@ namespace Ecommerce.Web
             builder.RegisterType<CreateCover>().AsSelf();
             builder.RegisterType<EditCover>().AsSelf();
 
-            //builder.RegisterType<AnswerCreateModel>()
+            builder.RegisterType<ProductModel>().AsSelf();
+            builder.RegisterType<ProductBaseModel>().AsSelf();
+            builder.RegisterType<CreateProduct>().AsSelf();
+
+            builder.RegisterType<ResponesModelTwo>().AsSelf();
+
+            builder.RegisterType<HttpContextAccessor>().As<IHttpContextAccessor>().InstancePerLifetimeScope();
+            builder.RegisterType<FileHelper>().As<IFileHelper>().InstancePerLifetimeScope();
+
+
+            //builder.RegisterType<BaseModel>()
             //    .AsSelf()
             //    .InstancePerLifetimeScope();
 
