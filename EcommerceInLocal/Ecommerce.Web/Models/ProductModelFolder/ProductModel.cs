@@ -9,7 +9,7 @@ namespace Ecommerce.Web.Models.ProductModelFolder
         private IProductServices _services;
         public ProductModel() { }
         
-        public ProductModel(IMapper mapper ,IProductServices services, IHttpContextAccessor httpContextAccessor) 
+        public ProductModel(IMapper mapper , IHttpContextAccessor httpContextAccessor, IProductServices services) 
             :base(mapper, httpContextAccessor)
         {
             _services = services;   

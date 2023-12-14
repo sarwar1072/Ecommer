@@ -1,21 +1,32 @@
-﻿using Ecommerce.Web.Models;
+﻿using Autofac;
+using Ecommerce.Web.Models;
+using Ecommerce.Web.Models.ProductModelFolder;
+using Framework.Services;
 using Microsoft.AspNetCore.Mvc;
+using Serilog.Configuration;
 using System.Diagnostics;
+using ProductBO = Framework.BusinessObj.Product;
 
 namespace Ecommerce.Web.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private IProductServices _productServices;
+        private ILifetimeScope _lifetimeScope;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IProductServices productServices, ILifetimeScope lifetimeScope)
         {
             _logger = logger;
+            _productServices = productServices;
+            _lifetimeScope = lifetimeScope;
         }
 
         public IActionResult Index()
         {
-            var model = new DashboardModel();
+            var model = _lifetimeScope.Resolve<ProductDetailsModel>();
+            model.ListOfProduct();
+
             return View(model);
         }
 

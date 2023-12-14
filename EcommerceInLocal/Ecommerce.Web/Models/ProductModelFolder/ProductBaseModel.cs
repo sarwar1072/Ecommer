@@ -27,7 +27,7 @@ namespace Ecommerce.Web.Models.ProductModelFolder
         //{
         //    get
         //    {
-        //        if (_httpContextAccessor.HttpContext.Session.IsAvailable  &&
+        //        if (_httpContextAccessor.HttpContext.Session.IsAvailable &&
         //            _httpContextAccessor.HttpContext.Session.Keys.Contains(nameof(Response2)))
         //        {
         //            var response = _httpContextAccessor.HttpContext.Session.Get<ResponesModelTwo>(nameof(Response2));

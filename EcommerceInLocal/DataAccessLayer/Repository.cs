@@ -259,7 +259,7 @@ namespace DataAccessLayer
             }
         }
         public List<TEntity> GetAll(Expression<Func<TEntity, bool>> filter = null, Func<IQueryable<TEntity>,
-            IOrderedQueryable<TEntity>> orderBy = null, string includeProperties = null)
+            IOrderedQueryable<TEntity>> orderBy = null, string includeProperties = "")
         {
             IQueryable<TEntity> query = _dbSet;
 

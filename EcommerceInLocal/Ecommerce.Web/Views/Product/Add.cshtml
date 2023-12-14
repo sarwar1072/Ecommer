@@ -1,103 +1,106 @@
 ﻿@model CreateProduct
 @{
-    ViewData["Title"] = "AddProduct";
+    ViewData["Title"] = "Add";
 }
 
-<form asp-controller="Product" asp-action="Add" method="post" asp-antiforgery="true" enctype="multipart/form-data">
-    <div class="row p-3 border">
-        <div class="col-12 border-bottom ">
-            <h3 class="text-warning">Add Product</h3>
-        </div>
-        <div class="col-8 pt-4">
-            <div class="form-group row  mt-2">
-                <div class="col-4">
-                    <label asp-for="Title"></label>
-                </div>
-                <div class="col-8">
-                    <input asp-for="Title" class="form-control" />
-                    <span asp-validation-for="Title" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group row  mt-2">
-                <div class="col-4">
-                    <label asp-for="Description"></label>
-                </div>
-                <div class="col-8">
-                    <textarea asp-for="Description" class="form-control"></textarea>
-                </div>
-            </div>
-            <div class="form-group row  mt-2">
-                <div class="col-4">
-                    <label asp-for="ISBN"></label>
-                </div>
-                <div class="col-8">
-                    <input asp-for="ISBN" class="form-control" />
-                    <span asp-validation-for="ISBN" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group row  mt-2">
-                <div class="col-4">
-                    <label asp-for="Author"></label>
-                </div>
-                <div class="col-8">
-                    <input asp-for="Author" class="form-control" />
-                    <span asp-validation-for="Author" class="text-danger"></span>
-                </div>
-            </div>
-                    
-            <div class="form-group row  mt-2">
-                <div class="col-4">
-                    <label asp-for="Price"></label>
-                </div>
-                <div class="col-8">
-                    <input asp-for="Price" class="form-control" />
-                    <span asp-validation-for="Price" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group row  mt-2">
-                <div class="col-4">
-                    Image
-                </div>
-                <div class="col-8">
-                    <input type="file" name="formFile" id="uploadBox" multiple class="form-control" />
-                </div>
-            </div>
-            <div class="form-group row  mt-2">
-                <div class="col-4">
-                    Category
-                </div>
-                <div class="col-sm-8">
-                    <select asp-for="CategoryId" asp-items="@Model.ListOfCategory()" class="form-control">
-                        <option>Please Select One</option>
-                    </select>
-                    <span asp-validation-for="CategoryId" class="text-danger"></span>
-                </div>
-            </div>
+<h1>Add</h1>
 
-            <div class="form-group row mt-2">
-                <div class="col-4">
-                    Category
-                </div>
-                <div class="col-sm-8">
-                    <select asp-for="CoverTypeId" asp-items="@Model.ListOfCoverType()" class="form-control">
-                        <option>Please Select One</option>
-                    </select>
-                    <span asp-validation-for="CoverTypeId" class="text-danger"></span>
-                </div>
-            </div>
-                    
-            <div class="form-group row mt-2">
-                <div class="col-4">
-                </div>
-                <div class="col-8">
-                    <input type="submit" value="Save" class="btn btn-primary" />&nbsp;
-                    <a asp-action="Index" asp-controller="Product" class="btn btn-warning">Cancel</a>
-                </div>
-            </div>
 
+<div class="row">
+    <div class="col-8">
+        <div class="card">
+            <div class="card-header">
+                @* @if (ViewBag.Message != null)
+                {
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>@ViewBag.Message!</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                } *@
+            </div>
+            <form asp-action="Add" method="post">
+                <div class="card-body">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group">
+                        <label asp-for="Title" class="control-label"></label>
+                        <input asp-for="Title" class="form-control" placeholder="Enter Title" />
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group">
+                        <label asp-for="Description" class="control-label"></label>
+                        <input asp-for="Description" class="form-control" placeholder="Enter Description" />
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group">
+                        <label asp-for="ISBN" class="control-label"></label>
+                        <input asp-for="ISBN" class="form-control" placeholder="Enter ISBN" />
+                        <span asp-validation-for="ISBN" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group">
+                        <label asp-for="Author" class="control-label"></label>
+                        <input asp-for="Author" class="form-control" placeholder="Enter Author" />
+                        <span asp-validation-for="Author" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group">
+                        <label asp-for="Price" class="control-label"></label>
+                        <input asp-for="Price" class="form-control" placeholder="Enter Price" />
+                        <span asp-validation-for="Price" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group">
+                        <select asp-for="CategoryId" asp-items="@Model.ListOfCategory()" class="form-control">
+                            <option>Please Select One</option>
+                        </select>
+                        <span asp-validation-for="CategoryId" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group">
+                        <select asp-for="CoverTypeId" asp-items="@Model.ListOfCoverType()" class="form-control">
+                            <option>Please Select One</option>
+                        </select>
+                        <span asp-validation-for="CoverTypeId" class="text-danger"></span>
+                    </div>
+                </div>
+              
+              @*   <div class="form-group row">
+                    <div class="col-4">
+                        Image
+                    </div>
+                    <div class="col-8">
+                        <input type="file" name="formFile" id="uploadBox" multiple class="form-control" />
+                    </div>
+                </div> *@
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </div>
+            </form>
         </div>
     </div>
-</form>
+</div>
 
 @section PageScript {
 

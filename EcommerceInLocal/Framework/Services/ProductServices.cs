@@ -69,6 +69,17 @@ namespace Framework.Services
             newObj.Category.Name = productEO.Category.Name;
             return newObj;  
         }
+        public IList<ProductBO> GetProductDetails()
+        {           
+            IList<ProductEO> listofProduct = _ecommerceUnitOf.ProductRepository.GetAll(null,null, "Category,CoverType");
+            var listofProductBO = new List<ProductBO>();
+            foreach (var item in listofProduct)
+            {
+                listofProductBO.Add(_mapper.Map<ProductBO>(item));
+            }
+            return listofProductBO;
+
+        }
         public IList<CategoryBO> GetCategories()
         {
             IList<CategoryEO> categoryEO= _ecommerceUnitOf.CategoryRepository.GetAll();

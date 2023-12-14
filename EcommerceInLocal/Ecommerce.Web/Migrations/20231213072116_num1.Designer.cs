@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Ecommerce.Web.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231209181308_num3")]
-    partial class num3
+    [Migration("20231213072116_num1")]
+    partial class num1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -290,10 +290,6 @@ namespace Ecommerce.Web.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ISBN")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

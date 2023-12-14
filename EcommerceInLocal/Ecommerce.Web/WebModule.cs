@@ -9,15 +9,23 @@ namespace Ecommerce.Web
 {
     public class WebModule : Module
     {
+        private readonly string _connectionString;
+        private readonly string _migrationAssemblyName;
+        private readonly string _webHostEnvironment;
+
+        public WebModule(string connectionString, string migrationAssemblyName,string webHostEnvironment)
+        {
+            _connectionString = connectionString;
+            _migrationAssemblyName = migrationAssemblyName;
+            _webHostEnvironment = webHostEnvironment;
+        }
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<CategoryVM>()
                 .AsSelf();
                 
-
             builder.RegisterType<CreateCategory>()
-                .AsSelf();
-                
+                .AsSelf();               
 
             builder.RegisterType<ResponseModel>()
                 .AsSelf()
@@ -37,17 +45,15 @@ namespace Ecommerce.Web
             builder.RegisterType<ProductModel>().AsSelf();
             builder.RegisterType<ProductBaseModel>().AsSelf();
             builder.RegisterType<CreateProduct>().AsSelf();
+            builder.RegisterType<ProductDetailsModel>().AsSelf();
 
-            builder.RegisterType<ResponesModelTwo>().AsSelf();
+           // builder.RegisterType<ResponesModelTwo>().AsSelf();
 
             builder.RegisterType<HttpContextAccessor>().As<IHttpContextAccessor>().InstancePerLifetimeScope();
             builder.RegisterType<FileHelper>().As<IFileHelper>().InstancePerLifetimeScope();
-
-
             //builder.RegisterType<BaseModel>()
             //    .AsSelf()
             //    .InstancePerLifetimeScope();
-
             base.Load(builder);
         }
     }

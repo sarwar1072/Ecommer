@@ -4,6 +4,7 @@ using Autofac.Extensions.DependencyInjection;
 using Framework;
 using Framework.ContextClass;
 using Framework.Entity.Membership;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
@@ -27,8 +28,7 @@ namespace Ecommerce.Web
             builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
             builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
             {
-                containerBuilder.RegisterModule(new WebModule());
-               // containerBuilder.RegisterModule(new MembershipModule());
+                containerBuilder.RegisterModule(new WebModule(connectionString, assemblyName, webHostEnvironment));
                 containerBuilder.RegisterModule(new InfrastructureModule(connectionString, assemblyName, webHostEnvironment));
                // containerBuilder.RegisterModule(new EmailMessagingModule(connectionString, assemblyName));
             });
@@ -137,7 +137,7 @@ namespace Ecommerce.Web
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "/{controller=Category}/{action=Index}/{id?}");
+                pattern: "/{controller=Home}/{action=Index}/{id?}");
            
             app.Run();
         }

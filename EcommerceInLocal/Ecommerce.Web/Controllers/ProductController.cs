@@ -10,16 +10,15 @@ namespace Ecommerce.Web.Controllers
 {
     public class ProductController : Controller
     {
-        private ILifetimeScope _lifetime;
+        protected ILifetimeScope _lifetime;
         IFileHelper _fileHelper;
-        private  IHttpContextAccessor _httpContextAccessor;
+        //private  IHttpContextAccessor _httpContextAccessor;
 
-        public ProductController(ILifetimeScope lifetime,IFileHelper fileHelper,
-            IHttpContextAccessor httpContextAccessor)
+        public ProductController(ILifetimeScope lifetime,IFileHelper fileHelper)
         {
             _lifetime = lifetime;
             _fileHelper = fileHelper;
-            _httpContextAccessor = httpContextAccessor;
+            //_httpContextAccessor = httpContextAccessor;
         }
         public IActionResult Index()
         {
@@ -38,23 +37,25 @@ namespace Ecommerce.Web.Controllers
             if (ModelState.IsValid)
             {
                 try
-                {
-                    model.ImageUrl = _fileHelper.UploadFile(model.formFile);
+                {                 
+                   // model.ImageUrl = _fileHelper.UploadFile(model.formFile);
                     model.AddProduct();
-                 //  model.Response2=new ResponesModelTwo("Success",ResponseType.Success);    
+                 // model.Response2=new ResponesModelTwo("Success",ResponseType.Success);    
                     ViewResponse("Success", ResponseType.Success);
                     return RedirectToAction(nameof(Index));
                 }
                 catch (DuplicationException ex)
                 {
-                    ViewResponse("Success", ResponseType.Duplicate);
+                    //model.Response2 = new ResponesModelTwo("Duplicate", ResponseType.Success);
+                    ViewResponse("Duplicate", ResponseType.Duplicate);
                     return RedirectToAction(nameof(Index));
                 }
                 catch (Exception ex)
                 {
-                    ViewResponse("Success", ResponseType.Failure);
+                    //model.Response2 = new ResponesModelTwo("Failure", ResponseType.Success);
+                    ViewResponse("Failure", ResponseType.Failure);
                 }
-            }
+           }
             return View(model);
         }
         //[HttpGet]
