@@ -26,8 +26,7 @@ namespace Ecommerce.Web.Models.ProductModelFolder
             var data = _services.GetProduct(dataTables.PageIndex,
                                                      dataTables.PageSize,
                                                      dataTables.SearchText,
-                                                     dataTables.GetSortText(new string[] { "Title",
-                                                     "Description","Author"}));
+                                                     dataTables.GetSortText(new string[] { "Title", "Description", "Author" }));
             return new
             {
                 recordsTotal = data.total,
@@ -45,7 +44,6 @@ namespace Ecommerce.Web.Models.ProductModelFolder
                             record.Id.ToString()
                         }).ToArray()
             };
-
         }
 
     }

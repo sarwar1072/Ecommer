@@ -24,10 +24,21 @@ namespace Ecommerce.Web.Controllers
 
         public IActionResult Index()
         {
-            var model = _lifetimeScope.Resolve<ProductDetailsModel>();
-            model.ListOfProduct();
+            //var model = _lifetimeScope.Resolve<ProductDetailsModel>();
+            //model.ListOfProduct();
+            IList<ProductBO> listOfProduct = _productServices.GetProductDetails();
 
-            return View(model);
+            return View(listOfProduct);
+        }
+
+        public IActionResult Details(int id)
+        {
+            var model = new ShoppingCartModel
+            {
+                Product = _productServices.GetOneProductDetails(id),
+                  Count = 1
+            };
+            return View(model); 
         }
 
         public IActionResult Privacy()

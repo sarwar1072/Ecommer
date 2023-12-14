@@ -15,6 +15,7 @@ namespace Framework.Services
         IList<CategoryBO> GetCategories();
         IList<CoverBO> GetCoverTypes();
         IList<ProductBO> GetProductDetails();
+        ProductBO GetOneProductDetails(int id);
         (IList<ProductBO> products, int total, int totalDisplay) GetProduct(int pageindex, int pagesize,
                                                                              string searchText, string orderBy);
     }

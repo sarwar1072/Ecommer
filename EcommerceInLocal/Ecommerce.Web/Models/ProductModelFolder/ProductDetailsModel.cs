@@ -7,20 +7,20 @@ namespace Ecommerce.Web.Models.ProductModelFolder
 {
     public class ProductDetailsModel:ProductBaseModel
     {
-            protected IProductServices _productService;           
-            public int Id { get; set; }
-            public string Title { get; set; }
-            public string Description { get; set; }
-            public string ISBN { get; set; }
-            public string Author { get; set; }
-            public double Price { get; set; }
-            //public string ImageUrl { get; set; }
-            //[Required]
-            //public IFormFile formFile { get; set; }
-            //public int CategoryId { get; set; }
-            //public int CoverTypeId { get; set; }
+            protected IProductServices _productService;
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public string ISBN { get; set; }
+        public string Author { get; set; }
+        public double Price { get; set; }
+        //public string ImageUrl { get; set; }
+        //[Required]
+        //public IFormFile formFile { get; set; }
+        //public int CategoryId { get; set; }
+        //public int CoverTypeId { get; set; }
 
-            public ProductDetailsModel(IProductServices productService, IMapper mapper, IHttpContextAccessor httpContextAccessor)
+        public ProductDetailsModel(IProductServices productService, IMapper mapper, IHttpContextAccessor httpContextAccessor)
                : base(mapper, httpContextAccessor)
             {
                 _productService = productService;
@@ -35,15 +35,15 @@ namespace Ecommerce.Web.Models.ProductModelFolder
                 // _mapper=_lifetimeScope.Resolve<IMapper>();
                 // base.ResolveDependency(_lifetimeScope);
             }
-        public void ListOfProduct()
-        {
-            var list = _productService.GetProductDetails();
-            foreach (var item in list)
-            {
+        //public void ListOfProduct()
+        //{
+        //    var list = _productService.GetProductDetails();
+        //    foreach (var item in list)
+        //    {
 
-            }
+        //    }
             
-        }
+        //}
 
 
         }

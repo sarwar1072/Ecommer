@@ -46,7 +46,7 @@ namespace Ecommerce.Web
             builder.RegisterType<ProductBaseModel>().AsSelf();
             builder.RegisterType<CreateProduct>().AsSelf();
             builder.RegisterType<ProductDetailsModel>().AsSelf();
-
+            builder.RegisterType<ShoppingCartModel>().AsSelf();
            // builder.RegisterType<ResponesModelTwo>().AsSelf();
 
             builder.RegisterType<HttpContextAccessor>().As<IHttpContextAccessor>().InstancePerLifetimeScope();

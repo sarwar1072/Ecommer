@@ -80,6 +80,12 @@ namespace Framework.Services
             return listofProductBO;
 
         }
+        public ProductBO GetOneProductDetails(int id)
+        {
+            var product = _ecommerceUnitOf.ProductRepository.GetFirstOrDefault(x => x.Id == id, "Category,CoverType");
+            var productBO = _mapper.Map<ProductBO>(product);
+            return productBO;
+        }
         public IList<CategoryBO> GetCategories()
         {
             IList<CategoryEO> categoryEO= _ecommerceUnitOf.CategoryRepository.GetAll();
