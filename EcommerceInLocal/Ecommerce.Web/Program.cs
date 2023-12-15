@@ -4,6 +4,8 @@ using Autofac.Extensions.DependencyInjection;
 using Framework;
 using Framework.ContextClass;
 using Framework.Entity.Membership;
+using Membership;
+using Membership.Services;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -30,7 +32,7 @@ namespace Ecommerce.Web
             {
                 containerBuilder.RegisterModule(new WebModule(connectionString, assemblyName, webHostEnvironment));
                 containerBuilder.RegisterModule(new InfrastructureModule(connectionString, assemblyName, webHostEnvironment));
-               // containerBuilder.RegisterModule(new EmailMessagingModule(connectionString, assemblyName));
+                containerBuilder.RegisterModule(new MembershipModule());
             });
           //  for solving routing errorrouing 
             builder.Services.AddControllersWithViews();
@@ -53,6 +55,7 @@ namespace Ecommerce.Web
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connectionString, m => m.MigrationsAssembly(assemblyName)));
 
+
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
@@ -62,13 +65,13 @@ namespace Ecommerce.Web
             //builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
             //.AddEntityFrameworkStores<ApplicationDbContext>();
             //builder.Services.AddControllersWithViews();
-            //builder.Services
-            //    .AddIdentity<ApplicationUser, Role>()
-            //    .AddEntityFrameworkStores<ApplicationDbContext>()
-            //.AddUserManager<UserManager>()
-            //.AddRoleManager<RoleManager>()
-            //.AddSignInManager<SignInManager>()
-            //.AddDefaultTokenProviders();
+            builder.Services
+                .AddIdentity<ApplicationUser, Role>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+            .AddUserManager<UserManager>()
+            .AddRoleManager<RoleManager>()
+            .AddSignInManager<SignInManager>()
+            .AddDefaultTokenProviders();
 
             //for session 
             builder.Services.AddDistributedMemoryCache();
