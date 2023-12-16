@@ -38,6 +38,19 @@ namespace Ecommerce.Web
             builder.RegisterType<EditCategory>()
                 .AsSelf();
 
+            builder.RegisterType<LoginModel>()
+               .AsSelf()
+               .InstancePerLifetimeScope();
+
+            builder.RegisterType<RegistrationConfirmationModel>()
+                .AsSelf()
+                .InstancePerLifetimeScope();
+
+            builder.RegisterType<RegisterModel>()
+                .AsSelf()
+                .InstancePerLifetimeScope();
+
+
             builder.RegisterType<CoverVM>().AsSelf();
             builder.RegisterType<CreateCover>().AsSelf();
             builder.RegisterType<EditCover>().AsSelf();

@@ -6,27 +6,25 @@ using Framework.Exceptions;
 
 namespace Ecommerce.Web.Controllers
 {
-    public class CoverController : Controller
+    public class CoverController : AreaBaseController<CoverController>
     {
-        private ILifetimeScope _lifetime;
-        public CoverController(ILifetimeScope lifetime)
+        public CoverController(ILifetimeScope scope):base(scope)
         {
-            _lifetime = lifetime;
         }
-        public IActionResult Index()
+        public IActionResult IndexCO()
         {
-            var model = _lifetime.Resolve<CoverVM>();
+            var model = _scope.Resolve<CoverVM>();
             return View(model);
         }
         public IActionResult Add()
         {
-            var model = _lifetime.Resolve<CreateCover>();
+            var model = _scope.Resolve<CreateCover>();
             return View(model);
         }
         [HttpPost, ValidateAntiForgeryToken]
         public IActionResult Add(CreateCover model)
         {
-            model.ResolveDependency(_lifetime);
+            model.ResolveDependency(_scope);
             if (ModelState.IsValid)
             {
                 try
@@ -51,7 +49,7 @@ namespace Ecommerce.Web.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            var model=_lifetime.Resolve<EditCover>();
+            var model=_scope.Resolve<EditCover>();
             //var model = new EditCover();
             model.Load(id);
             return View(model); 
@@ -59,7 +57,7 @@ namespace Ecommerce.Web.Controllers
         [HttpPost,ValidateAntiForgeryToken]
         public IActionResult Edit(EditCover editCover)
         {
-            editCover.ResolveDependency(_lifetime);
+            editCover.ResolveDependency(_scope);
             if(ModelState.IsValid)
             {
                 try
@@ -83,18 +81,10 @@ namespace Ecommerce.Web.Controllers
         public IActionResult GetCover()
         {
             var tableModel = new DataTablesAjaxRequestModel(Request);
-            var model = _lifetime.Resolve<CoverVM>();
+            var model = _scope.Resolve<CoverVM>();
             var data = model.GetCover(tableModel);
             return Json(data);
         }
 
-        protected virtual void ViewResponse(string message, ResponseType responseTypes)
-        {
-            TempData.Put("ResponseMessage", new ResponseModel
-            {
-                Message = message,
-                Type = responseTypes,
-            });
-        }
     }
 }

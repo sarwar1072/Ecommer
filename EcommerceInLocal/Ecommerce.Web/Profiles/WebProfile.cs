@@ -1,10 +1,8 @@
 ﻿using AutoMapper;
+using Ecommerce.Web.Models;
 using Ecommerce.Web.Models.CategoryModelFolder;
-//using ProblemAndSolution.Infrastructure.BusinessObj;
-//using ProblemAndSolution.Membership.BusinessObj;
-//using ProblemAndSolution.Membership.DTOS;
-//using ProblemAndSolution.Web.Areas.ForPost.Models;
-//using ProblemAndSolution.Web.Models;
+using Membership.BusinessObj;
+using Membership.DTOS;
 using CategoryBO = Framework.BusinessObj.Category;
 namespace Ecommerce.Web.Profiles
 {
@@ -13,6 +11,8 @@ namespace Ecommerce.Web.Profiles
         public WebProfile()
         {
             CreateMap<CreateCategory, CategoryBO>().ReverseMap();
+            CreateMap<RegisterModel, ApplicationUser>().ReverseMap();
+            CreateMap<ApplicationUser, UserBasicInfo>().ReverseMap();
             //CreateMap<ApplicationUser, UserBasicInfo>().ReverseMap();
             //CreateMap<Question, QuestionCreateModel>().ReverseMap();
             //CreateMap<Question, QuestionEditModel>().ReverseMap();

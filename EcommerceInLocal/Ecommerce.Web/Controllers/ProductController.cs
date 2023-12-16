@@ -8,32 +8,31 @@ using Ecommerce.Web.Models.CoverModelFolder;
 
 namespace Ecommerce.Web.Controllers
 {
-    public class ProductController : Controller
+    public class ProductController : AreaBaseController<ProductController>
     {
-        protected ILifetimeScope _lifetime;
+        //protected ILifetimeScope _lifetime;
         IFileHelper _fileHelper;
         //private  IHttpContextAccessor _httpContextAccessor;
 
-        public ProductController(ILifetimeScope lifetime,IFileHelper fileHelper)
+        public ProductController(ILifetimeScope scope,IFileHelper fileHelper):base(scope)
         {
-            _lifetime = lifetime;
             _fileHelper = fileHelper;
             //_httpContextAccessor = httpContextAccessor;
         }
-        public IActionResult Index()
+        public IActionResult IndexP()
         {
-            var model = _lifetime.Resolve<ProductModel>();
+            var model = _scope.Resolve<ProductModel>();
             return View(model);
         }
         public IActionResult Add()
         {
-            var model = _lifetime.Resolve<CreateProduct>();
+            var model = _scope.Resolve<CreateProduct>();
             return View(model);
         }
         [HttpPost,ValidateAntiForgeryToken]
         public IActionResult Add(CreateProduct model)
         {
-            model.ResolveDependency(_lifetime);
+            model.ResolveDependency(_scope);
             if (ModelState.IsValid)
             {
                 try
@@ -69,18 +68,11 @@ namespace Ecommerce.Web.Controllers
         public IActionResult GetProduct()
         {
             var tableModel = new DataTablesAjaxRequestModel(Request);
-            var model = _lifetime.Resolve<ProductModel>();
+            var model = _scope.Resolve<ProductModel>();
             var data = model.GetProduct(tableModel);
             return Json(data);
         }
 
-        protected virtual void ViewResponse(string message, ResponseType responseTypes)
-        {
-            TempData.Put("ResponseMessage", new ResponseModel
-            {
-                Message = message,
-                Type = responseTypes,
-            });
-        }
+        
     }
 }

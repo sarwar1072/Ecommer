@@ -9,27 +9,26 @@ using System;
 
 namespace Ecommerce.Web.Controllers
 {
-    public class CategoryController : Controller
+    public class CategoryController : AreaBaseController<CategoryController>
     {
-        private ILifetimeScope _lifetime;
-       public CategoryController(ILifetimeScope lifetime)
+        
+       public CategoryController(ILifetimeScope scope):base(scope)    
         {
-            _lifetime = lifetime;
         }
-        public IActionResult Index()
+        public IActionResult IndexC()
         {
-            var model = _lifetime.Resolve<CategoryVM>();
+            var model = _scope.Resolve<CategoryVM>();
             return View(model);
         }
         public IActionResult Add()
         {
-            var model= _lifetime.Resolve<CreateCategory>();
+            var model= _scope.Resolve<CreateCategory>();
             return View(model); 
         }
         [HttpPost, ValidateAntiForgeryToken]
         public IActionResult Add(CreateCategory model)
         {                         
-                 model.ResolveDependency(_lifetime);
+                 model.ResolveDependency(_scope);
                     if (ModelState.IsValid)
                     {
                         try
@@ -54,14 +53,14 @@ namespace Ecommerce.Web.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            var model=_lifetime.Resolve<EditCategory>();
+            var model=_scope.Resolve<EditCategory>();
             model.Load(id);
             return View(model); 
         }
         [HttpPost, ValidateAntiForgeryToken]
         public IActionResult Edit(EditCategory editCategory)
         {
-            editCategory.ResolveDependency(_lifetime);
+            editCategory.ResolveDependency(_scope);
             
             if (ModelState.IsValid)
             {
@@ -88,7 +87,7 @@ namespace Ecommerce.Web.Controllers
         {
             try
             {
-                var model = _lifetime.Resolve<EditCategory>();
+                var model = _scope.Resolve<EditCategory>();
                  model.Delete(id);
                 ViewResponse("Question has been successfully deleted.", ResponseType.Success);
             }
@@ -102,17 +101,10 @@ namespace Ecommerce.Web.Controllers
         public IActionResult GetCategory()
         {
             var tableModel = new DataTablesAjaxRequestModel(Request);
-            var model = _lifetime.Resolve<CategoryVM>();
+            var model = _scope.Resolve<CategoryVM>();
             var data = model.GetCategory(tableModel);
             return Json(data);
         }
-        protected virtual void ViewResponse(string message, ResponseType responseTypes)
-        {
-            TempData.Put("ResponseMessage", new ResponseModel
-            {
-                Message = message,
-                Type = responseTypes,
-            });
-        }
+        
     }
 }
