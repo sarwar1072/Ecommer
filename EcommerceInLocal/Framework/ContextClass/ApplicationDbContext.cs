@@ -1,5 +1,6 @@
 ﻿using Framework.Entity;
 using Framework.Entity.Membership;
+using Framework.Seeds;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using ApplicationUser = Framework.Entity.Membership.ApplicationUser;
@@ -38,14 +39,14 @@ namespace Framework.ContextClass
         protected override void OnModelCreating(ModelBuilder builder)
         {
             #region Seed
-            //builder.Entity<ApplicationUser>()
-            //    .HasData(ApplicationUserSeed.Users);
+            builder.Entity<ApplicationUser>()
+                .HasData(ApplicationUserSeed.Users);
 
-            //builder.Entity<Role>()
-            //    .HasData(RoleSeed.Roles);
+            builder.Entity<Role>()
+                .HasData(RoleSeed.Roles);
 
-            //builder.Entity<UserRole>()
-            //    .HasData(UserRoleSeed.UserRole);
+            builder.Entity<UserRole>()
+                .HasData(UserRoleSeed.UserRole);
 
             base.OnModelCreating(builder);
             #endregion

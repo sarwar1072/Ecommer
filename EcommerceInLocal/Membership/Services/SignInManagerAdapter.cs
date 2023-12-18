@@ -8,7 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ApplicationUserEO = Framework.Entity.Membership.ApplicationUser;
-
 namespace Membership.Services
 {
     public class SignInManagerAdapter: ISignInManagerAdapter<ApplicationUser>

@@ -86,6 +86,13 @@
                                                 <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                                             </div>
                                         </div>
+                                        <div class="row mb-3">
+                                            <select asp-for="Role" asp-items="Model.ListOfRoleType()" class="form-select">
+                                                <option disabled selected>-Select Roles</option>
+
+                                            </select>
+
+                                        </div>
                                         <div>
                                             <button id="registerSubmit" type="submit" class="btn btn-primary text-white me-2 mb-2 mb-md-0">Sign up</button>
                                         </div>

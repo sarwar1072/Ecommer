@@ -3,6 +3,7 @@ using Membership.BusinessObj;
 using Membership.Enums;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query.Internal;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using ApplicationUserEO = Framework.Entity.Membership.ApplicationUser;
+using RoleEO = Framework.Entity.Membership.Role;
 
 namespace Membership.Services
 {
@@ -18,14 +20,16 @@ namespace Membership.Services
         private readonly UserManager _userManager;
         private readonly SignInManager _signInManager;
         private  IMapper _mapper;
+        private readonly RoleManager _roleManager;
         private readonly IHttpContextAccessor _contextAccessor;
         public UserManagerAdapter(UserManager userManager,SignInManager signInManager,
-            IMapper mapper,IHttpContextAccessor contextAccessor)
+            IMapper mapper,IHttpContextAccessor contextAccessor, RoleManager roleManager)
         {
             _userManager=userManager;
             _signInManager=signInManager;   
             _mapper=mapper;
-            _contextAccessor=contextAccessor;   
+            _roleManager = roleManager;
+            _contextAccessor =contextAccessor;   
         }
         private ApplicationUserEO GetSingleEntity(ApplicationUser user)
         {
@@ -156,7 +160,10 @@ namespace Membership.Services
                                                                  confirmPassword);
             return result;
         }
-
+        public  List<RoleEO> ListOfRoles()
+        {
+             return _roleManager.Roles.ToList();           
+        }
         public async Task RolesAsync(string userid, RoleType[] types)
         {
             if (string.IsNullOrEmpty(userid))
@@ -167,8 +174,8 @@ namespace Membership.Services
 
             var user = await FindUserIdAsync(userid);
             var roles = types.Select(a => a.ToString()).ToArray();
+
             await _userManager.AddToRolesAsync(user, roles);
         }
-
     }
 }

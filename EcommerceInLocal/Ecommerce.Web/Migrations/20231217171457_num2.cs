@@ -3,10 +3,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace Ecommerce.Web.Migrations
 {
     /// <inheritdoc />
-    public partial class num1 : Migration
+    public partial class num2 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -215,6 +217,33 @@ namespace Ecommerce.Web.Migrations
                         principalTable: "Covers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { new Guid("2c5e174e-3b0e-446f-86af-483d56fd7210"), "638384516976439552", "Admin", "ADMIN" },
+                    { new Guid("e943ffbf-65a4-4d42-bb74-f2ca9ea8d22a"), "638384516976439630", "User", "USER" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[,]
+                {
+                    { new Guid("8f3d96ce-76ec-4992-911a-33ceb81fa29d"), 0, "8305497c-05e4-4001-86dd-d20ded8aee72", "user@stackOverflow.com", true, "sarwar", "mahmud", true, null, "USER@STACKOVERFLOW.COM", "USER@STACKOVERFLOW.COM", "AQAAAAIAAYagAAAAEKrZDZlvAlXaE2UBcE7bUCqZ5cNCTMetyVQCtCpk4au+3KlXFBJqUPrAvD/591eWeg==", null, false, "680f6111-a026-4ecc-82d1-1af498b1dda3", false, "user@stackOverflow.com" },
+                    { new Guid("e9b3be8c-99c5-42c7-8f2e-1eb39f6d9125"), 0, "d4841e01-6142-48a9-b4eb-218f2e3c770e", "admin@stackOverflow.com", true, "Admin", "", true, null, "ADMIN@STACKOVERFLOW.COM", "ADMIN@STACKOVERFLOW.COM", "AQAAAAIAAYagAAAAEEM/32jjW7lIvsexLczHStbj2oQ7NA9KWkFiXVnfd5JSCHz+ItX6rjxQ9fMkiT8GPQ==", null, false, "bf9316b5-2ae4-49e6-af53-50b9bace33fa", false, "admin@stackOverflow.com" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[,]
+                {
+                    { new Guid("e943ffbf-65a4-4d42-bb74-f2ca9ea8d22a"), new Guid("8f3d96ce-76ec-4992-911a-33ceb81fa29d") },
+                    { new Guid("2c5e174e-3b0e-446f-86af-483d56fd7210"), new Guid("e9b3be8c-99c5-42c7-8f2e-1eb39f6d9125") }
                 });
 
             migrationBuilder.CreateIndex(

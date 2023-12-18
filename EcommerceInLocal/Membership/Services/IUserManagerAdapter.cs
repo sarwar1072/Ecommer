@@ -1,11 +1,12 @@
-﻿using Membership.Enums;
+﻿using Framework.Entity.Membership;
+using Membership.Enums;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using RoleEO = Framework.Entity.Membership.Role;
 namespace Membership.Services
 {
     public interface IUserManagerAdapter<T> where T:class
@@ -22,5 +23,6 @@ namespace Membership.Services
                                             string confirmPassword);
         Task RolesAsync(string userid, RoleType[] types);
         Task<T> FindByUsernameAsync(string email);
+        List<RoleEO> ListOfRoles();
     }
 }

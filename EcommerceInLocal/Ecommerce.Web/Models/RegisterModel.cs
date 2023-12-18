@@ -4,6 +4,8 @@ using Membership.BusinessObj;
 using Membership.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
 
 namespace Ecommerce.Web.Models
@@ -12,6 +14,7 @@ namespace Ecommerce.Web.Models
     {
         private IUserManagerAdapter<ApplicationUser>? _userManagerAdapter;
         private ISignInManagerAdapter<ApplicationUser>? _signInManagerAdapter;
+       // private RoleManager _roleManager;
         private ILifetimeScope? _scope;
         private IMapper? _mapper;
 
@@ -40,7 +43,9 @@ namespace Ecommerce.Web.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string? ConfirmPassword { get; set; }
-
+        public string Role { get; set; }
+        [ValidateNever]
+        //public IEnumerable<SelectList> RoleList { get; set; }
         public string? ReturnUrl { get; set; }
 
         public IList<AuthenticationScheme>? ExternalLogins { get; set; }
@@ -96,6 +101,22 @@ namespace Ecommerce.Web.Models
         internal async Task GetExternalAuthenticationSchemesAsync()
         {
             ExternalLogins = (await _signInManagerAdapter!.GetExternalSchemeAsync()).ToList();
+        }
+
+        public IList<SelectListItem> ListOfRoleType()
+        {
+            var role = new List<SelectListItem>();
+            foreach (var item in _userManagerAdapter.ListOfRoles())
+            {
+                var addItem = new SelectListItem
+                {
+                    Text = item.Name,
+                    Value = item.Id.ToString()
+                };
+                role.Add(addItem);
+            }
+
+            return role;
         }
 
         private ApplicationUser GetMember()

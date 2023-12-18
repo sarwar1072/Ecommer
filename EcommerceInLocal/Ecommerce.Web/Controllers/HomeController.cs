@@ -14,23 +14,19 @@ namespace Ecommerce.Web.Controllers
         private readonly ILogger<HomeController> _logger;
         private IProductServices _productServices;
         private ILifetimeScope _lifetimeScope;
-
         public HomeController(ILogger<HomeController> logger, IProductServices productServices, ILifetimeScope lifetimeScope)
         {
             _logger = logger;
             _productServices = productServices;
             _lifetimeScope = lifetimeScope;
         }
-
         public IActionResult Index()
         {
             //var model = _lifetimeScope.Resolve<ProductDetailsModel>();
             //model.ListOfProduct();
             IList<ProductBO> listOfProduct = _productServices.GetProductDetails();
-
             return View(listOfProduct);
         }
-
         public IActionResult Details(int id)
         {
             var model = new ShoppingCartModel

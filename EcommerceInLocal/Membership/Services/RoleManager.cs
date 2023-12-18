@@ -10,5 +10,6 @@ namespace Membership.Services
            : base(store, roleValidators, keyNormalizer, errors, logger)
         {
         }
+
     }
 }

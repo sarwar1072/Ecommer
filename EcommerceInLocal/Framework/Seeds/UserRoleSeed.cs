@@ -1,8 +1,6 @@
-﻿
+﻿using Framework.Entity.Membership;
 
-using Framework.Entity.Membership;
-
-namespace PFramework.Seeds
+namespace Framework.Seeds
 {
     public class UserRoleSeed
     {

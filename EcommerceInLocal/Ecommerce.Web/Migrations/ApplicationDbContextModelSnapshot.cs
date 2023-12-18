@@ -131,6 +131,44 @@ namespace Ecommerce.Web.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("e9b3be8c-99c5-42c7-8f2e-1eb39f6d9125"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "d4841e01-6142-48a9-b4eb-218f2e3c770e",
+                            Email = "admin@stackOverflow.com",
+                            EmailConfirmed = true,
+                            FirstName = "Admin",
+                            LastName = "",
+                            LockoutEnabled = true,
+                            NormalizedEmail = "ADMIN@STACKOVERFLOW.COM",
+                            NormalizedUserName = "ADMIN@STACKOVERFLOW.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEEM/32jjW7lIvsexLczHStbj2oQ7NA9KWkFiXVnfd5JSCHz+ItX6rjxQ9fMkiT8GPQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "bf9316b5-2ae4-49e6-af53-50b9bace33fa",
+                            TwoFactorEnabled = false,
+                            UserName = "admin@stackOverflow.com"
+                        },
+                        new
+                        {
+                            Id = new Guid("8f3d96ce-76ec-4992-911a-33ceb81fa29d"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "8305497c-05e4-4001-86dd-d20ded8aee72",
+                            Email = "user@stackOverflow.com",
+                            EmailConfirmed = true,
+                            FirstName = "sarwar",
+                            LastName = "mahmud",
+                            LockoutEnabled = true,
+                            NormalizedEmail = "USER@STACKOVERFLOW.COM",
+                            NormalizedUserName = "USER@STACKOVERFLOW.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKrZDZlvAlXaE2UBcE7bUCqZ5cNCTMetyVQCtCpk4au+3KlXFBJqUPrAvD/591eWeg==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "680f6111-a026-4ecc-82d1-1af498b1dda3",
+                            TwoFactorEnabled = false,
+                            UserName = "user@stackOverflow.com"
+                        });
                 });
 
             modelBuilder.Entity("Framework.Entity.Membership.Role", b =>
@@ -159,6 +197,22 @@ namespace Ecommerce.Web.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("2c5e174e-3b0e-446f-86af-483d56fd7210"),
+                            ConcurrencyStamp = "638384516976439552",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = new Guid("e943ffbf-65a4-4d42-bb74-f2ca9ea8d22a"),
+                            ConcurrencyStamp = "638384516976439630",
+                            Name = "User",
+                            NormalizedName = "USER"
+                        });
                 });
 
             modelBuilder.Entity("Framework.Entity.Membership.RoleClaim", b =>
@@ -243,6 +297,18 @@ namespace Ecommerce.Web.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = new Guid("e9b3be8c-99c5-42c7-8f2e-1eb39f6d9125"),
+                            RoleId = new Guid("2c5e174e-3b0e-446f-86af-483d56fd7210")
+                        },
+                        new
+                        {
+                            UserId = new Guid("8f3d96ce-76ec-4992-911a-33ceb81fa29d"),
+                            RoleId = new Guid("e943ffbf-65a4-4d42-bb74-f2ca9ea8d22a")
+                        });
                 });
 
             modelBuilder.Entity("Framework.Entity.Membership.UserToken", b =>

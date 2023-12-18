@@ -33,6 +33,7 @@ namespace Ecommerce.Web.Controllers
         public IActionResult Add(CreateProduct model)
         {
             model.ResolveDependency(_scope);
+
             if (ModelState.IsValid)
             {
                 try

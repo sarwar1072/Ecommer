@@ -25,8 +25,8 @@ namespace Framework.Seeds
 				var normalUser = new ApplicationUser
 				{
 					Id = Guid.Parse("8f3d96ce-76ec-4992-911a-33ceB81fa29d"),
-					FirstName = "Saiful",
-					LastName = "Islam",
+					FirstName = "sarwar",
+					LastName = "mahmud",
 					UserName = "user@stackOverflow.com",
 					NormalizedUserName = "USER@STACKOVERFLOW.COM",
 					Email = "user@stackOverflow.com",
