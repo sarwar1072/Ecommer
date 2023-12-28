@@ -11,7 +11,7 @@ namespace Framework.Seeds
 			{
 				var rootUser = new ApplicationUser
 				{
-					Id = Guid.Parse("e9b3be8c-99c5-42c7-8f2e-1eb39f6d9125"),
+					Id =Guid.Parse("e9b3be8c-99c5-42c7-8f2e-1eb39f6d9125"),
 					FirstName = "Admin",
 					LastName = "",
 					UserName = "admin@stackOverflow.com",
@@ -24,7 +24,7 @@ namespace Framework.Seeds
 				};
 				var normalUser = new ApplicationUser
 				{
-					Id = Guid.Parse("8f3d96ce-76ec-4992-911a-33ceB81fa29d"),
+					Id =Guid.Parse ("8f3d96ce-76ec-4992-911a-33ceB81fa29d"),
 					FirstName = "sarwar",
 					LastName = "mahmud",
 					UserName = "user@stackOverflow.com",

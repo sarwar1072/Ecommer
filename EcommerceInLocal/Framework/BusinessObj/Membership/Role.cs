@@ -4,12 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Membership.Enums
+namespace Framework.BusinessObj.Membership
 {
-    public enum RoleType
+    public class Role
     {
-        Customer,
-            Admin,
-            User
+        public string  Name { get; set; }
     }
 }

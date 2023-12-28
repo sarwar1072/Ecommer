@@ -57,11 +57,11 @@ namespace Ecommerce.Web.Controllers
                 return RedirectToAction("Register");
             }
           
-                var user = await registerModel.FindByEmailAsync(email);
-                if (user == null)
-                {
-                    return NotFound($"Unable to load user with email '{email}'.");
-                }
+                //var user = await registerModel.FindByEmailAsync(email);
+                //if (user == null)
+                //{
+                //    return NotFound($"Unable to load user with email '{email}'.");
+                //}
 
                 model.Email = email;
                 // await registerModel.EmailConfirmationTokenAsync();

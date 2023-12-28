@@ -10,6 +10,7 @@ namespace Framework.BusinessObj.Membership
     {
         public  string? FirstName { get; set; }
         public string? LastName { get; set; }
+        public Role Role { get; set; }
         //public List<Question>? questions { get; set; }
     }
 }

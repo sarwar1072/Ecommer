@@ -1,26 +1,26 @@
 ﻿using Autofac;
 using AutoMapper;
 using Framework.Services;
+using Membership.BusinessObj;
+using Membership.Services;
 using Microsoft.AspNetCore.Http;
 
 namespace Ecommerce.Web.Models.ProductModelFolder
 {
-    public class ProductBaseModel
+    public class ProductBaseModel:BaseModel
     {
-        protected IMapper? _mapper;
-        protected ILifetimeScope? _lifetimeScope;
-        protected  IHttpContextAccessor _httpContextAccessor;
+
         public ProductBaseModel() { }
-        public ProductBaseModel(IMapper mapper, IHttpContextAccessor httpContextAccessor)
+        public ProductBaseModel(IMapper mapper, 
+            IUserManagerAdapter<ApplicationUser> userManager, ILifetimeScope lifetimeScope):
+            base(mapper,userManager)
         {
-            _mapper = mapper;
-            _httpContextAccessor = httpContextAccessor;
         }
-        public virtual void ResolveDependency(ILifetimeScope lifetimeScope)
+        public override void ResolveDependency(ILifetimeScope lifetimeScope)
         {
             _lifetimeScope = lifetimeScope;
             _mapper = _lifetimeScope.Resolve<IMapper>();
-            _httpContextAccessor = _lifetimeScope.Resolve<IHttpContextAccessor>();
+           // _httpContextAccessor = _lifetimeScope.Resolve<IHttpContextAccessor>();
         }
 
         //public ResponesModelTwo Response2

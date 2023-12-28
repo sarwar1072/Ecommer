@@ -12,6 +12,7 @@ namespace DataAccessLayer
         public UnitOfWork(DbContext dbContext) => _dbContext = dbContext;
 
         public void Dispose() => _dbContext?.Dispose();
+
         public void Save() => _dbContext?.SaveChanges();
     }
 }

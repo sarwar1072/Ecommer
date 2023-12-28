@@ -13,7 +13,6 @@ namespace Ecommerce.Web.Controllers
         //protected ILifetimeScope _lifetime;
         IFileHelper _fileHelper;
         //private  IHttpContextAccessor _httpContextAccessor;
-
         public ProductController(ILifetimeScope scope,IFileHelper fileHelper):base(scope)
         {
             _fileHelper = fileHelper;
@@ -33,29 +32,33 @@ namespace Ecommerce.Web.Controllers
         public IActionResult Add(CreateProduct model)
         {
             model.ResolveDependency(_scope);
+            //_scope.Resolve<IFileHelper>();
+            // _scope.Resolve<ResponesModelTwo>();
 
-            if (ModelState.IsValid)
-            {
+
+            //if (ModelState.IsValid)
+            //{
                 try
-                {                 
-                   // model.ImageUrl = _fileHelper.UploadFile(model.formFile);
+                {
+                    model.ImageUrl = _fileHelper.UploadFile(model.formFile);
                     model.AddProduct();
-                 // model.Response2=new ResponesModelTwo("Success",ResponseType.Success);    
+                    //model.Response2=new ResponesModelTwo("Success",ResponseType.Success);    
                     ViewResponse("Success", ResponseType.Success);
-                    return RedirectToAction(nameof(Index));
+                    return RedirectToAction(nameof(IndexP));
                 }
                 catch (DuplicationException ex)
                 {
                     //model.Response2 = new ResponesModelTwo("Duplicate", ResponseType.Success);
                     ViewResponse("Duplicate", ResponseType.Duplicate);
-                    return RedirectToAction(nameof(Index));
+                    return RedirectToAction(nameof(IndexP));
                 }
                 catch (Exception ex)
                 {
                     //model.Response2 = new ResponesModelTwo("Failure", ResponseType.Success);
                     ViewResponse("Failure", ResponseType.Failure);
                 }
-           }
+          //  }
+                                    
             return View(model);
         }
         //[HttpGet]

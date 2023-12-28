@@ -137,7 +137,7 @@ namespace Ecommerce.Web.Migrations
                         {
                             Id = new Guid("e9b3be8c-99c5-42c7-8f2e-1eb39f6d9125"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d4841e01-6142-48a9-b4eb-218f2e3c770e",
+                            ConcurrencyStamp = "05a10eb9-ce35-44a8-a0b0-d78b087b1686",
                             Email = "admin@stackOverflow.com",
                             EmailConfirmed = true,
                             FirstName = "Admin",
@@ -145,9 +145,9 @@ namespace Ecommerce.Web.Migrations
                             LockoutEnabled = true,
                             NormalizedEmail = "ADMIN@STACKOVERFLOW.COM",
                             NormalizedUserName = "ADMIN@STACKOVERFLOW.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEEM/32jjW7lIvsexLczHStbj2oQ7NA9KWkFiXVnfd5JSCHz+ItX6rjxQ9fMkiT8GPQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELDNzDjYAi2O7gXAi/Nb8dA3PXMuolCTHWJv1EQPletMCXPKsAMuhy/ZAuN/yPE+XQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "bf9316b5-2ae4-49e6-af53-50b9bace33fa",
+                            SecurityStamp = "1a5e9040-3e01-4f31-90af-73c39936db95",
                             TwoFactorEnabled = false,
                             UserName = "admin@stackOverflow.com"
                         },
@@ -155,7 +155,7 @@ namespace Ecommerce.Web.Migrations
                         {
                             Id = new Guid("8f3d96ce-76ec-4992-911a-33ceb81fa29d"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8305497c-05e4-4001-86dd-d20ded8aee72",
+                            ConcurrencyStamp = "c32f121c-9d17-488b-94c6-ceb2bde7ea79",
                             Email = "user@stackOverflow.com",
                             EmailConfirmed = true,
                             FirstName = "sarwar",
@@ -163,9 +163,9 @@ namespace Ecommerce.Web.Migrations
                             LockoutEnabled = true,
                             NormalizedEmail = "USER@STACKOVERFLOW.COM",
                             NormalizedUserName = "USER@STACKOVERFLOW.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKrZDZlvAlXaE2UBcE7bUCqZ5cNCTMetyVQCtCpk4au+3KlXFBJqUPrAvD/591eWeg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAECpa+d+JmrLWw4S8Q5GOcRGe8PGLkcbUHgRNI6E0tOQw/tp4ZB48QNvhAPxMtYLIxQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "680f6111-a026-4ecc-82d1-1af498b1dda3",
+                            SecurityStamp = "790e27f0-2faf-415a-8399-8bd8c6bbb0e1",
                             TwoFactorEnabled = false,
                             UserName = "user@stackOverflow.com"
                         });
@@ -202,14 +202,14 @@ namespace Ecommerce.Web.Migrations
                         new
                         {
                             Id = new Guid("2c5e174e-3b0e-446f-86af-483d56fd7210"),
-                            ConcurrencyStamp = "638384516976439552",
+                            ConcurrencyStamp = "638392085016384524",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = new Guid("e943ffbf-65a4-4d42-bb74-f2ca9ea8d22a"),
-                            ConcurrencyStamp = "638384516976439630",
+                            ConcurrencyStamp = "638392085016384596",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -356,6 +356,10 @@ namespace Ecommerce.Web.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
@@ -370,6 +374,30 @@ namespace Ecommerce.Web.Migrations
                     b.HasIndex("CoverTypeId");
 
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("Framework.Entity.ShoppingCart", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<Guid>("ApplicationUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ShoppingCarts");
                 });
 
             modelBuilder.Entity("Framework.Entity.Membership.RoleClaim", b =>
@@ -440,6 +468,17 @@ namespace Ecommerce.Web.Migrations
                     b.Navigation("Category");
 
                     b.Navigation("CoverType");
+                });
+
+            modelBuilder.Entity("Framework.Entity.ShoppingCart", b =>
+                {
+                    b.HasOne("Framework.Entity.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
                 });
 #pragma warning restore 612, 618
         }

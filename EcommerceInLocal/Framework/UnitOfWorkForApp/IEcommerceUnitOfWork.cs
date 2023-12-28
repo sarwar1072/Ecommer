@@ -12,7 +12,9 @@ namespace Framework.UnitOfWorkForApp
     {
          ICategoryRepository CategoryRepository { get;  }
          ICoverRepository CoverRepository { get;  }
-        IProductRepository ProductRepository {  get; }  
+        IProductRepository ProductRepository {  get; }
+         IShoppingCartRepository ShoppingCartRepository { get; }
+
 
     }
 }

@@ -18,13 +18,12 @@ namespace Framework.Entity
         public string ISBN { get; set; }
         public string Author { get; set; }
         public double Price { get; set; }     
-        //public string ImageUrl { get; set; }
+        public string ImageUrl { get; set; }
         public int CategoryId { get; set; }
         [ForeignKey("CategoryId")]
         public Category Category { get; set; }
         public int CoverTypeId { get; set; }
         [ForeignKey("CoverTypeId")]
         public Cover CoverType { get; set; }
-
     }
 }

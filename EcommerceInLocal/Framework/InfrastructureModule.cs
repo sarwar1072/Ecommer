@@ -37,15 +37,15 @@ namespace Framework
 
             builder.RegisterType<CategoryRepository>().As<ICategoryRepository>()
                 .InstancePerLifetimeScope();
+            builder.RegisterType<ShoppingCartRepository>().As<IShoppingCartRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<CoverRepository>().As<ICoverRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<ProductRepository>().As<IProductRepository>().InstancePerLifetimeScope();
 
+            builder.RegisterType<ShoppingCartServices>().As<IShoppingCartServices>().InstancePerLifetimeScope();
             builder.RegisterType<CategoryService>().As<ICategoryService>()
                 .InstancePerLifetimeScope();
-
-            builder.RegisterType<CoverRepository>().As<ICoverRepository>().InstancePerLifetimeScope();
             builder.RegisterType<CoverService>().As<ICoverService>().InstancePerLifetimeScope();
-            builder.RegisterType<ProductRepository>().As<IProductRepository>().InstancePerLifetimeScope();
             builder.RegisterType<ProductServices>().As<IProductServices>().InstancePerLifetimeScope();
-
             base.Load(builder);
         }
     }

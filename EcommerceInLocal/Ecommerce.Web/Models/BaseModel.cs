@@ -12,36 +12,35 @@ using Membership.BusinessObj;
 
 namespace Ecommerce.Web.Models
 {
-    public abstract class BaseModel
+    public  class BaseModel
     {
         protected IMapper? _mapper;
         protected ILifetimeScope?  _lifetimeScope;
-        protected IHttpContextAccessor _httpContextAccessor;
+       // protected IHttpContextAccessor _httpContextAccessor;
         protected IUserManagerAdapter<ApplicationUser> _userManager;
-        public UserBasicInfo? basicInfo { get; private set; }
+        public UserBasicInfo? basicInfo {get; private set;}
         public BaseModel() { }
-        public BaseModel(IMapper mapper,IHttpContextAccessor httpContextAccessor,
-            IUserManagerAdapter<ApplicationUser> userManager,ILifetimeScope lifetimeScope)
+        public BaseModel(IMapper mapper,
+            IUserManagerAdapter<ApplicationUser> userManager)
         {
             _mapper = mapper;
-            _httpContextAccessor = httpContextAccessor;
+            //_httpContextAccessor = httpContextAccessor;
             _userManager = userManager;
-            _lifetimeScope = lifetimeScope;
         }
         public virtual void ResolveDependency(ILifetimeScope lifetimeScope)
         {
             _lifetimeScope = lifetimeScope;
             _mapper = _lifetimeScope.Resolve<IMapper>();
-           _httpContextAccessor = _lifetimeScope.Resolve<IHttpContextAccessor>();
+          // _httpContextAccessor = _lifetimeScope.Resolve<IHttpContextAccessor>();
             _userManager = _lifetimeScope.Resolve<IUserManagerAdapter<ApplicationUser>>();
         }
-        public async virtual Task GetUserInfo()
-        {
-            var userName = _httpContextAccessor!.HttpContext!.User!.Identity!.Name;
-            var userInfo=await _userManager!.FindByUsernameAsync(userName!);
-            basicInfo = new UserBasicInfo();
-            _mapper!.Map(userInfo,userInfo); 
-        }
+        //public   void GetUserInfo()
+        //{
+        //    var userName = _httpContextAccessor!.HttpContext!.User!.Identity!.Name;
+        //    var userInfo= _userManager!.FindByUsernameAsync(userName!);
+        //    basicInfo = new UserBasicInfo();
+        //    _mapper!.Map(userInfo,userInfo); 
+        //}
         //public ResponesModelTwo Response2
         //{
         //    get
@@ -56,7 +55,7 @@ namespace Ecommerce.Web.Models
         //        }
         //        else
         //        {
-        //            return null;
+        //            return null;-
         //        }
         //    }
         //    set

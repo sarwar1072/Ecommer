@@ -12,29 +12,27 @@ namespace Ecommerce.Web.Models.ProductModelFolder
     public class CreateProduct:ProductBaseModel
     {
         protected IProductServices _productService;
-        //protected IMapper? _mapper;
-        //protected ILifetimeScope? _lifetimeScope;
-        //protected IHttpContextAccessor _httpContextAccessor;
-        [Key]
+       // [Key]
         public int Id { get; set; }
-        [Required]
+        //[Required]
         public string Title { get; set; }
         public string Description { get; set; }
-        [Required]
+       // [Required]
         public string ISBN { get; set; }
-        [Required]
+       // [Required]
         public string Author { get; set; }
-        [Required]
+       // [Required]
       //  [Range(1, 10000)]
         public double Price { get; set; }
-        //public string ImageUrl { get; set; }
-        //[Required]
-        //public IFormFile formFile { get; set; }
+        public string ImageUrl { get; set; }
+
+        public IFormFile formFile { get; set; }
+
         public int CategoryId { get; set; }
         public int CoverTypeId { get; set; }
 
-        public CreateProduct(IProductServices productService,IMapper mapper, IHttpContextAccessor httpContextAccessor) 
-           : base(mapper,  httpContextAccessor)
+        public CreateProduct(IProductServices productService) 
+           
         {
             _productService= productService;  
            // _mapper= mapper;    
@@ -57,7 +55,7 @@ namespace Ecommerce.Web.Models.ProductModelFolder
                 ISBN = ISBN,
                 Author = Author,
                 Price = Price,
-               // ImageUrl = ImageUrl,
+               ImageUrl = ImageUrl,
                 CoverTypeId = CoverTypeId,
                 CategoryId = CategoryId
             };

@@ -10,6 +10,5 @@ namespace Ecommerce.Web.Models
     {
         void DeleteFile(string imageUrl);
         string UploadFile(IFormFile file);
-        
     }
 }

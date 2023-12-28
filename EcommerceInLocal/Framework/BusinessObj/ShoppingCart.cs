@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Framework.BusinessObj.Membership;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
 using System.Linq;
@@ -13,6 +14,8 @@ namespace Framework.BusinessObj
         public Product Product { get; set; }
         public int ProductId { get; set; }
         public int Count { get; set; }
+        public Guid ApplicationUerId { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
         //public ShoppingCart()
         //{
         //    Count = 1;

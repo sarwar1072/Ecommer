@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Membership.BusinessObj;
+using Membership.DTOS;
 using Membership.Enums;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -42,6 +43,18 @@ namespace Membership.Services
             var user=_mapper.Map<ApplicationUser>(userEO);
             return user;
         }
+        //public ApplicationUser FindByUsernameAsync(string email)
+        //{
+        //    var user =  _userManager.FindByEmailAsync(email).Result;
+        //    if (user == null)
+        //    {
+        //        return null;
+        //    }
+        //    else
+        //    {
+        //        return GetSingleBusinessObj(user);
+        //    }
+        //}
         public async Task<IdentityResult> CreateAsync(ApplicationUser user,string password)
         {
             if (user == null)
@@ -52,15 +65,13 @@ namespace Membership.Services
             
              var entity=GetSingleEntity(user);
             var result = await _userManager.CreateAsync(entity, password);
-
             if (!result.Succeeded)
             {
                 return result;
             }
-            var roleResult = await _userManager.AddToRoleAsync(entity,"User");
-
+            
+             var roleResult = await _userManager.AddToRoleAsync(entity,"User");           
             await SignInAsync(entity);
-
             if (!roleResult.Succeeded)
             {
                 return roleResult;
@@ -91,18 +102,7 @@ namespace Membership.Services
             return await _userManager.GetUserIdAsync(entity);
         }
 
-        public async Task<ApplicationUser> FindByUsernameAsync(string email)
-        {
-            var user= await _userManager.FindByEmailAsync(email);
-            if (user == null)
-            {
-                return null;
-            }
-            else
-            {
-                return GetSingleBusinessObj(user);
-            }
-        }
+       
 
         public async Task<IList<string>> GetUserRolesAsync(string email)
         {

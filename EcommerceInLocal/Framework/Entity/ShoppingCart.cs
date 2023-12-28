@@ -1,6 +1,8 @@
 ﻿using DataAccessLayer;
+using Framework.Entity.Membership;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics.Tracing;
 using System.Linq;
 using System.Text;
@@ -14,6 +16,10 @@ namespace Framework.Entity
         public Product Product { get; set; }
         public int ProductId { get; set; }
         public int Count { get; set; }
+        public Guid ApplicationUserId { get; set; }
+        [NotMapped]
+        public ApplicationUser ApplicationUser { get; set; }
+
         //public ShoppingCart()
         //{
         //    Count = 1;

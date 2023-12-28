@@ -28,6 +28,8 @@
                             <th>Author</th>
                             <th>Price</th>
                             <th>Category</th>
+                            <th>photos</th>
+
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -40,6 +42,8 @@
                             <th>Author</th>
                             <th>Price</th>
                             <th>Category</th>
+                            <th>photos</th>
+
                             <th>Action</th>
                         </tr>
                     </tfoot>
@@ -93,16 +97,16 @@
                 "ajax": "/Product/GetProduct",
 
                  "columnDefs": [
-                //     {
-                //         "orderable": false,
-                //         "targets": 5,
-                //         "render": function (data, type, row) {
-                //             return `<img src=${data} width='50px' />`;
-                //         }
-                //     },
                     {
                         "orderable": false,
                         "targets": 6,
+                        "render": function (data, type, row) {
+                            return `<img src=${data} width='50px' />`;
+                        }
+                    },
+                    {
+                        "orderable": false,
+                        "targets": 7,
                         "width": "20%",
                         "render": function (data, type, row) {
                             return `<button type="submit" class="btn btn-info btn-sm" onclick="window.location.href='/Product/EditProduct/${data}'" value='${data}'>

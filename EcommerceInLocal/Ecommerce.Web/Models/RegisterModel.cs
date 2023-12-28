@@ -43,8 +43,8 @@ namespace Ecommerce.Web.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string? ConfirmPassword { get; set; }
-        public string Role { get; set; }
-        [ValidateNever]
+       //public string Role { get; set; }
+       // [ValidateNever]
         //public IEnumerable<SelectList> RoleList { get; set; }
         public string? ReturnUrl { get; set; }
 
@@ -79,14 +79,14 @@ namespace Ecommerce.Web.Models
         {
             return _userManagerAdapter!.ConfirmedAccount();
         }
-        internal async Task<RegisterModel> FindByEmailAsync(string email)
-        {
-            var user = _userManagerAdapter.FindByUsernameAsync(email);
-            if (user == null)
-                return null;
-            else
-                return _mapper.Map(user, this);
-        }
+        //internal async Task<RegisterModel> FindByEmailAsync(string email)
+        //{
+        //    var user = _userManagerAdapter.FindByUsernameAsync(email);
+        //    if (user == null)
+        //        return null;
+        //    else
+        //        return _mapper.Map(user, this);
+        //}
 
         internal async Task SignInAsync()
         {

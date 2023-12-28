@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Ecommerce.Web.Migrations
 {
     /// <inheritdoc />
-    public partial class num2 : Migration
+    public partial class num1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -199,6 +199,7 @@ namespace Ecommerce.Web.Migrations
                     ISBN = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Author = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Price = table.Column<double>(type: "float", nullable: false),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
                     CoverTypeId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -219,13 +220,34 @@ namespace Ecommerce.Web.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "ShoppingCarts",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    Count = table.Column<int>(type: "int", nullable: false),
+                    ApplicationUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ShoppingCarts", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ShoppingCarts_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { new Guid("2c5e174e-3b0e-446f-86af-483d56fd7210"), "638384516976439552", "Admin", "ADMIN" },
-                    { new Guid("e943ffbf-65a4-4d42-bb74-f2ca9ea8d22a"), "638384516976439630", "User", "USER" }
+                    { new Guid("2c5e174e-3b0e-446f-86af-483d56fd7210"), "638392085016384524", "Admin", "ADMIN" },
+                    { new Guid("e943ffbf-65a4-4d42-bb74-f2ca9ea8d22a"), "638392085016384596", "User", "USER" }
                 });
 
             migrationBuilder.InsertData(
@@ -233,8 +255,8 @@ namespace Ecommerce.Web.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { new Guid("8f3d96ce-76ec-4992-911a-33ceb81fa29d"), 0, "8305497c-05e4-4001-86dd-d20ded8aee72", "user@stackOverflow.com", true, "sarwar", "mahmud", true, null, "USER@STACKOVERFLOW.COM", "USER@STACKOVERFLOW.COM", "AQAAAAIAAYagAAAAEKrZDZlvAlXaE2UBcE7bUCqZ5cNCTMetyVQCtCpk4au+3KlXFBJqUPrAvD/591eWeg==", null, false, "680f6111-a026-4ecc-82d1-1af498b1dda3", false, "user@stackOverflow.com" },
-                    { new Guid("e9b3be8c-99c5-42c7-8f2e-1eb39f6d9125"), 0, "d4841e01-6142-48a9-b4eb-218f2e3c770e", "admin@stackOverflow.com", true, "Admin", "", true, null, "ADMIN@STACKOVERFLOW.COM", "ADMIN@STACKOVERFLOW.COM", "AQAAAAIAAYagAAAAEEM/32jjW7lIvsexLczHStbj2oQ7NA9KWkFiXVnfd5JSCHz+ItX6rjxQ9fMkiT8GPQ==", null, false, "bf9316b5-2ae4-49e6-af53-50b9bace33fa", false, "admin@stackOverflow.com" }
+                    { new Guid("8f3d96ce-76ec-4992-911a-33ceb81fa29d"), 0, "c32f121c-9d17-488b-94c6-ceb2bde7ea79", "user@stackOverflow.com", true, "sarwar", "mahmud", true, null, "USER@STACKOVERFLOW.COM", "USER@STACKOVERFLOW.COM", "AQAAAAIAAYagAAAAECpa+d+JmrLWw4S8Q5GOcRGe8PGLkcbUHgRNI6E0tOQw/tp4ZB48QNvhAPxMtYLIxQ==", null, false, "790e27f0-2faf-415a-8399-8bd8c6bbb0e1", false, "user@stackOverflow.com" },
+                    { new Guid("e9b3be8c-99c5-42c7-8f2e-1eb39f6d9125"), 0, "05a10eb9-ce35-44a8-a0b0-d78b087b1686", "admin@stackOverflow.com", true, "Admin", "", true, null, "ADMIN@STACKOVERFLOW.COM", "ADMIN@STACKOVERFLOW.COM", "AQAAAAIAAYagAAAAELDNzDjYAi2O7gXAi/Nb8dA3PXMuolCTHWJv1EQPletMCXPKsAMuhy/ZAuN/yPE+XQ==", null, false, "1a5e9040-3e01-4f31-90af-73c39936db95", false, "admin@stackOverflow.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -294,6 +316,11 @@ namespace Ecommerce.Web.Migrations
                 name: "IX_Products_CoverTypeId",
                 table: "Products",
                 column: "CoverTypeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ShoppingCarts_ProductId",
+                table: "ShoppingCarts",
+                column: "ProductId");
         }
 
         /// <inheritdoc />
@@ -315,13 +342,16 @@ namespace Ecommerce.Web.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Products");
+                name: "ShoppingCarts");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Products");
 
             migrationBuilder.DropTable(
                 name: "Categories");

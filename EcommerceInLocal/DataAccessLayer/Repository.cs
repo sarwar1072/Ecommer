@@ -6,6 +6,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Linq.Dynamic.Core;
 using Microsoft.EntityFrameworkCore.Query;
+using System.Security.Cryptography;
 
 namespace DataAccessLayer
 {
@@ -27,7 +28,11 @@ namespace DataAccessLayer
         {
             _dbSet.Add(entity);
         }
-
+        public virtual void Edit(TEntity entityToUpdate)
+        {
+            _dbSet.Attach(entityToUpdate);
+            _dbContext.Entry(entityToUpdate).State = EntityState.Modified;
+        }
         public virtual void Remove(TKey id)
         {
             var entityToDelete = _dbSet.Find(id);
@@ -52,13 +57,9 @@ namespace DataAccessLayer
             _dbSet.RemoveRange(_dbSet.Where(filter));
         }
 
-        public virtual void Edit(TEntity entityToUpdate)
-        {
-            _dbSet.Attach(entityToUpdate);
-            _dbContext.Entry(entityToUpdate).State = EntityState.Modified;
-        }
+       
 
-        public virtual int GetCount(Expression<Func<TEntity, bool>> filter = null)
+        public virtual int GetCount(Expression<Func<TEntity, bool>> filter)
         {
             IQueryable<TEntity> query = _dbSet;
             var count = 0;
@@ -280,7 +281,7 @@ namespace DataAccessLayer
             }
             return query.ToList();
         }
-        public TEntity GetFirstOrDefault(Expression<Func<TEntity, bool>> filter = null, string? includeProperties = null)
+        public TEntity GetFirstOrDefault(Expression<Func<TEntity, bool>> filter = null, string? includeProperties = "")
         {
             IQueryable< TEntity> query = _dbSet;
             if (filter != null)

@@ -13,7 +13,7 @@ namespace Ecommerce.Web
         private readonly string _migrationAssemblyName;
         private readonly string _webHostEnvironment;
 
-        public WebModule(string connectionString, string migrationAssemblyName,string webHostEnvironment)
+        public WebModule(string connectionString, string migrationAssemblyName, string webHostEnvironment)
         {
             _connectionString = connectionString;
             _migrationAssemblyName = migrationAssemblyName;
@@ -60,13 +60,13 @@ namespace Ecommerce.Web
             builder.RegisterType<CreateProduct>().AsSelf();
             builder.RegisterType<ProductDetailsModel>().AsSelf();
             builder.RegisterType<ShoppingCartModel>().AsSelf();
-           // builder.RegisterType<ResponesModelTwo>().AsSelf();
+            builder.RegisterType<UserAccessor>().As<IUserAccessor>().InstancePerLifetimeScope();
 
             builder.RegisterType<HttpContextAccessor>().As<IHttpContextAccessor>().InstancePerLifetimeScope();
             builder.RegisterType<FileHelper>().As<IFileHelper>().InstancePerLifetimeScope();
-            //builder.RegisterType<BaseModel>()
-            //    .AsSelf()
-            //    .InstancePerLifetimeScope();
+            builder.RegisterType<BaseModel>()
+                .AsSelf()
+                .InstancePerLifetimeScope();
             base.Load(builder);
         }
     }
