@@ -7,7 +7,7 @@ namespace Ecommerce.Web.Controllers
 {
     public class AccountController : BaseController<AccountController>
     {
-        public AccountController(ILifetimeScope scope):base(scope) 
+        public AccountController(ILifetimeScope scope,IUserAccessor userAccessor):base(scope,userAccessor) 
         {
                 
         }

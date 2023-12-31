@@ -13,33 +13,19 @@ using ProductBO = Framework.BusinessObj.Product;
 
 namespace Ecommerce.Web.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : AreaBaseController<HomeController>
     {
         private readonly ILogger<HomeController> _logger;
-        private IProductServices _productServices;
-        private ILifetimeScope _lifetimeScope;
-        protected IUserAccessor _userAccessor;
+        private IProductServices _productServices;    
         private IEcommerceUnitOfWork _EcommerceUnit;    
-        public HomeController(IUserAccessor userAccessor,ILogger<HomeController> logger, IProductServices productServices, ILifetimeScope lifetimeScope,
-            IEcommerceUnitOfWork EcommerceUnit)
+        public HomeController(IUserAccessor userAccessor,ILogger<HomeController> logger, IProductServices productServices, ILifetimeScope scope,
+            IEcommerceUnitOfWork EcommerceUnit):base(scope, userAccessor)
         {
             _EcommerceUnit = EcommerceUnit;
-            _userAccessor =userAccessor; 
             _logger = logger;
             _productServices = productServices;
-            _lifetimeScope = lifetimeScope;
-        }
-        public ApplicationUser CurrentUser
-        {
-            get
-            {
-                if (User != null)
-                    return _userAccessor.GetUser();
-                else
-                    return null;
-            }
-        }
-        public IActionResult Index()
+        }      
+        public IActionResult IndexH()
         {
             //var model = _lifetimeScope.Resolve<ProductDetailsModel>();
             //model.ListOfProduct();
@@ -60,10 +46,10 @@ namespace Ecommerce.Web.Controllers
         [Authorize]
         public IActionResult Details(ShoppingCartModel model)
         {       
-            model.ResolveDependency(_lifetimeScope);             
+            model.ResolveDependency(_scope);             
             model.ApplicationUserId = CurrentUser.Id;                     
             model.AddCart();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(IndexH));
         }
 
         public IActionResult Privacy()

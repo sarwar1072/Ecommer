@@ -8,7 +8,7 @@ namespace Ecommerce.Web.Controllers
 {
     public class CoverController : AreaBaseController<CoverController>
     {
-        public CoverController(ILifetimeScope scope):base(scope)
+        public CoverController(ILifetimeScope scope,IUserAccessor userAccessor):base(scope, userAccessor)
         {
         }
         public IActionResult IndexCO()

@@ -19,6 +19,8 @@ namespace Framework.Entity
         public Guid ApplicationUserId { get; set; }
         [NotMapped]
         public ApplicationUser ApplicationUser { get; set; }
+        [NotMapped] 
+        public double Price { get; set; }
 
         //public ShoppingCart()
         //{

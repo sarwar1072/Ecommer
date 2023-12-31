@@ -13,7 +13,7 @@ namespace Ecommerce.Web.Controllers
         //protected ILifetimeScope _lifetime;
         IFileHelper _fileHelper;
         //private  IHttpContextAccessor _httpContextAccessor;
-        public ProductController(ILifetimeScope scope,IFileHelper fileHelper):base(scope)
+        public ProductController(ILifetimeScope scope,IFileHelper fileHelper,IUserAccessor userAccessor):base(scope,userAccessor)
         {
             _fileHelper = fileHelper;
             //_httpContextAccessor = httpContextAccessor;

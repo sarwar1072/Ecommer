@@ -12,7 +12,7 @@ namespace Ecommerce.Web.Controllers
     public class CategoryController : AreaBaseController<CategoryController>
     {
         
-       public CategoryController(ILifetimeScope scope):base(scope)    
+       public CategoryController(ILifetimeScope scope,IUserAccessor userAccessor):base(scope,userAccessor)    
         {
         }
         public IActionResult IndexC()

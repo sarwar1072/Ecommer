@@ -67,6 +67,7 @@ namespace Ecommerce.Web
             builder.RegisterType<BaseModel>()
                 .AsSelf()
                 .InstancePerLifetimeScope();
+            builder.RegisterType<ShoppingCartVM>().AsSelf();  
             base.Load(builder);
         }
     }
