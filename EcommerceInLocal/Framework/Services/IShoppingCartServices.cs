@@ -15,5 +15,7 @@ namespace Framework.Services
         ShoppingCart GetCartById(int id);
         IList<ShoppingCart> GetShoppingCart(Guid id);
         void UpdateCart(int id);
+        void MinusCart(int id);
+        void RemoveCart(int id);
     }
 }

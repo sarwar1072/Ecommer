@@ -42,10 +42,32 @@ namespace Framework.Services
         public void UpdateCart(int id)
         {
             var cartNumber = _unitOfWork.ShoppingCartRepository.GetFirstOrDefault(x=>x.Id==id);
+            
             cartNumber.Count++;
             _unitOfWork.ShoppingCartRepository.Edit(cartNumber);
             _unitOfWork.Save();
             
+        }
+        public void MinusCart(int id)
+        {
+            var cartNumber = _unitOfWork.ShoppingCartRepository.GetFirstOrDefault(x => x.Id == id);
+
+            if (cartNumber.Count == 1)
+            {
+                _unitOfWork.ShoppingCartRepository.Remove(cartNumber);
+            }
+            else
+            {
+                cartNumber.Count--;
+                _unitOfWork.ShoppingCartRepository.Edit(cartNumber);
+            }
+            _unitOfWork.Save();
+        }
+        public void RemoveCart(int id)
+        {
+           var count= _unitOfWork.ShoppingCartRepository.GetFirstOrDefault(x => x.Id == id);
+            _unitOfWork.ShoppingCartRepository.Remove(count);
+            _unitOfWork.Save(); 
         }
         public ShoppingCart GetCartById(int id)
         {

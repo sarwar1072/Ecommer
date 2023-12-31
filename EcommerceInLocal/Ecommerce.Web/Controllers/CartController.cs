@@ -34,6 +34,16 @@ namespace Ecommerce.Web.Controllers
             _cartServices.UpdateCart(cartId);
             return RedirectToAction(nameof(IndexCart));
         }
+        public IActionResult Minus(int cartId)
+        {
+            _cartServices.MinusCart(cartId);
+            return RedirectToAction(nameof(IndexCart));
+        }
+        public IActionResult Remove(int cartId) 
+        {
+            _cartServices.RemoveCart(cartId);
+            return RedirectToAction(nameof(IndexCart));
+        }
     }
 }
 
