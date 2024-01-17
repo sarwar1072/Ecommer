@@ -57,7 +57,8 @@ namespace Framework.ContextClass
         public DbSet<Cover>? Covers { get; set; }
         public DbSet<Product>? Products { get; set; }
         public DbSet<ShoppingCart>? ShoppingCarts { get; set; }
-        //public DbSet<Tag>? Tags { get; set; }
-        //public DbSet<Vote> Votes { get; set; }
+        public DbSet<OrderDetails>? OrderDetails { get; set; }  
+        public DbSet<OrderHeader>? orderHeaders { get; set; }
+        
     }
 }

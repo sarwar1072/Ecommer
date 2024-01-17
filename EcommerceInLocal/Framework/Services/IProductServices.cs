@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CategoryBO = Framework.BusinessObj.Category;
 using CoverBO = Framework.BusinessObj.Cover;
+using Framework.BusinessObj;
 
 namespace Framework.Services
 {
@@ -14,9 +15,10 @@ namespace Framework.Services
         void AddProduct(ProductBO productBO);
         IList<CategoryBO> GetCategories();
         IList<CoverBO> GetCoverTypes();
-        IList<ProductBO> GetProductDetails();
+        IEnumerable<ProductBO> GetProductDetails();
         ProductBO GetOneProductDetails(int id);
         (IList<ProductBO> products, int total, int totalDisplay) GetProduct(int pageindex, int pagesize,
                                                                              string searchText, string orderBy);
+        ProductDetails PagintList(bool paging = false, int currentPage = 0);
     }
 }

@@ -10,6 +10,9 @@ using Serilog.Configuration;
 using System.Diagnostics;
 using System.Security.Claims;
 using ProductBO = Framework.BusinessObj.Product;
+using Framework.ContextClass;
+//using Framework.Entity;
+using Microsoft.EntityFrameworkCore;
 
 namespace Ecommerce.Web.Controllers
 {
@@ -17,19 +20,24 @@ namespace Ecommerce.Web.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private IProductServices _productServices;    
-        private IEcommerceUnitOfWork _EcommerceUnit;    
+        private IEcommerceUnitOfWork _EcommerceUnit;
+        private ApplicationDbContext _context;
         public HomeController(IUserAccessor userAccessor,ILogger<HomeController> logger, IProductServices productServices, ILifetimeScope scope,
-            IEcommerceUnitOfWork EcommerceUnit):base(scope, userAccessor)
+            IEcommerceUnitOfWork EcommerceUnit,ApplicationDbContext context):base(scope, userAccessor)
         {
             _EcommerceUnit = EcommerceUnit;
             _logger = logger;
             _productServices = productServices;
+            _context = context;
         }      
-        public IActionResult IndexH()
+        public IActionResult IndexH(int currentPage=1)
         {
             //var model = _lifetimeScope.Resolve<ProductDetailsModel>();
             //model.ListOfProduct();
-            IList<ProductBO> listOfProduct = _productServices.GetProductDetails();
+            // var exclude = (pagenumber * pageSize)-pageSize;
+            // var productList = _context.Products.Skip(exclude).Take(pageSize);
+            // IEnumerable<ProductBO> listOfProduct = _productServices.GetProductDetails().Skip(exclude).Take(pageSize);
+            var listOfProduct = _productServices.PagintList(true, currentPage);
             return View(listOfProduct);
         }
         public IActionResult Details(int productId)

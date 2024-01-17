@@ -16,10 +16,8 @@ namespace Ecommerce.Web.Models
         {
             _cartServices = cartServices;
         }
-        public ShoppingCartVM()
-        {
-                
-        }
+        public ShoppingCartVM() { }
+        
         public override void ResolveDependency(ILifetimeScope scope)
         {
             _lifetimeScope = scope;
@@ -27,9 +25,8 @@ namespace Ecommerce.Web.Models
             base.ResolveDependency(scope);
         }
         public IList<ShoppingCart> ListCart { get; set; } 
-        //public OrderHeader OrderHeader { get; set; }
+        public OrderHeader OrderHeader { get; set; }
         public ApplicationUser Auser { get; set; }
-        public double OrderTotal { get; set; }
         public void GetCartDetails(Guid id)
         {
             _cartServices.GetShoppingCart(id);

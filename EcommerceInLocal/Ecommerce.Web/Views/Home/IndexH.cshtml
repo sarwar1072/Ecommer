@@ -1,9 +1,10 @@
-﻿@model IList<Framework.BusinessObj.Product>
+﻿@model Framework.BusinessObj.ProductDetails
 @{
     ViewData["Title"] = "Home Page";
+    
 }
 <div class="row pb-3 backgroundWhite">
-    @foreach (var product in Model)
+    @foreach (var product in Model.ProductList)
     {
         <div class="col-lg-3 col-md-6">
             <div class="row p-2">
@@ -26,5 +27,18 @@
             </div>
         </div>
     }
+    
 </div>
-
+<div class="pagination">
+    @for (int i = 1; i <= Model.TotalPages; i++)
+    {
+        if (i == Model.CurrentPage)
+        {
+            <a href="/Home/IndexH?currentPage=@i&term" class="active">@i</a>
+        }
+        else
+        {
+            <a href="/Home/IndexH?currentPage=@i&term">@i</a>
+        }
+    }
+</div>

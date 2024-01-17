@@ -56,7 +56,7 @@
                         <ul class="list-group">
                             <li class="list-group-item d-flex justify-content-between bg-light">
                                 <span class="text-info"> Total (USD)</span>
-                                 <strong class="text-info">$ <span id="txtOrderTotal">@Model.OrderTotal</span></strong>
+                                 <strong class="text-info">$ <span id="txtOrderTotal">@Model.OrderHeader.OrderTotal</span></strong>
                             </li>
                         </ul>
                     </div>
@@ -68,7 +68,7 @@
                 <div class="card-footer row">                                                                                    
                         <div class="col-sm-12 col-lg-4 col-md-6 offset-lg-8 offset-md-6 ">
 
-                            <a asp-area="Customer" asp-controller="Cart" asp-action="Summary" class="btn btn-success form-control">Summary</a>
+                            <a  asp-controller="Cart" asp-action="Summary" class="btn btn-success form-control">Summary</a>
                         </div>                                       
                 </div>
             </div>

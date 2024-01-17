@@ -13,6 +13,8 @@ using CoverEO = Framework.Entity.Cover;
 using CoverBO = Framework.BusinessObj.Cover;
 using CategoryBO = Framework.BusinessObj.Category;
 using CategoryEO = Framework.Entity.Category;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Framework.BusinessObj;
 
 namespace Framework.Services
 {
@@ -69,16 +71,15 @@ namespace Framework.Services
             newObj.Category.Name = productEO.Category.Name;
             return newObj;  
         }
-        public IList<ProductBO> GetProductDetails()
-        {           
-            IList<ProductEO> listofProduct = _ecommerceUnitOf.ProductRepository.GetAll(null,null, "Category,CoverType");
+        public IEnumerable<ProductBO> GetProductDetails()
+        {
+            IList<ProductEO> listofProduct = _ecommerceUnitOf.ProductRepository.GetAll(null, null, "Category,CoverType"); 
             var listofProductBO = new List<ProductBO>();
             foreach (var item in listofProduct)
             {
                 listofProductBO.Add(_mapper.Map<ProductBO>(item));
-            }
+            }          
             return listofProductBO;
-
         }
         public ProductBO GetOneProductDetails(int id)
         {
@@ -86,6 +87,24 @@ namespace Framework.Services
             var productBO = _mapper.Map<ProductBO>(product);
             return productBO;
         }
+        public ProductDetails PagintList(bool paging=false,int currentPage = 0)
+        {
+            var data = new ProductDetails();
+            var dataList = _ecommerceUnitOf.ProductRepository.GetAll(null, null, "Category,CoverType");
+            if (paging)
+            {
+                int pageSize = 3;
+                int count = dataList.Count;
+                int TotalPages = (int)Math.Ceiling(count / (double)pageSize);
+                dataList = dataList.Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                data.PageSize = pageSize;
+                data.CurrentPage = currentPage;
+                data.TotalPages = TotalPages;
+            }
+            data.ProductList = dataList.AsQueryable();
+            return data;
+        }
+
         public IList<CategoryBO> GetCategories()
         {
             IList<CategoryEO> categoryEO= _ecommerceUnitOf.CategoryRepository.GetAll();

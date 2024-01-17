@@ -10,6 +10,8 @@ namespace Framework.ContextClass
         DbSet<Category>? Categories { get; set; }
         DbSet<Cover>? Covers { get; set; }
         DbSet<Product>? Products { get; set; }
-       
+        DbSet<OrderDetails>? OrderDetails { get; set; }
+        DbSet<OrderHeader>? orderHeaders { get; set; }
+
     }
 }

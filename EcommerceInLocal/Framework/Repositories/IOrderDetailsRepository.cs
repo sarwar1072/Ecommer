@@ -9,12 +9,7 @@ using System.Threading.Tasks;
 
 namespace Framework.Repositories
 {
-    public class ProductRepository:Repository<Product,int,ApplicationDbContext>, IProductRepository 
+    public interface IOrderDetailsRepository:IRepository<OrderDetails,int,ApplicationDbContext>
     {
-        public ProductRepository(ApplicationDbContext dbContext):base(dbContext)
-        {
-                
-        }
-        
     }
 }

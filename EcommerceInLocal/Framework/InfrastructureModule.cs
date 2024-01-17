@@ -11,7 +11,6 @@ namespace Framework
         private readonly string _connectionString;
         private readonly string _migrationAssemblyName;
         private readonly string _webHostEnvironment;
-
         public InfrastructureModule(string connectionString, string migrationAssemblyName,
             string webHostEnvironment)
         {
@@ -19,7 +18,6 @@ namespace Framework
             _migrationAssemblyName = migrationAssemblyName;
             _webHostEnvironment = webHostEnvironment;
         }
-
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<ApplicationDbContext>().AsSelf()
@@ -46,6 +44,10 @@ namespace Framework
                 .InstancePerLifetimeScope();
             builder.RegisterType<CoverService>().As<ICoverService>().InstancePerLifetimeScope();
             builder.RegisterType<ProductServices>().As<IProductServices>().InstancePerLifetimeScope();
+            builder.RegisterType<OrderServices>().As<IOrderServices>().InstancePerLifetimeScope();  
+            builder.RegisterType<OrderDetailsRepository>().As<IOrderDetailsRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<OrderHeaderRepository>().As<IOrderHeaderRepository>().InstancePerLifetimeScope();
+
             base.Load(builder);
         }
     }

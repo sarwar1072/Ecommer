@@ -36,6 +36,7 @@ namespace Ecommerce.Web
             });
           //  for solving routing errorrouing 
             builder.Services.AddControllersWithViews();
+           // builder.Services.AddCloudscribePagination();
 
         //Serilog Configuration
         builder.Host.UseSerilog((ctx, lc) => lc
