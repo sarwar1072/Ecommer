@@ -87,20 +87,17 @@ namespace Framework.Services
             var productBO = _mapper.Map<ProductBO>(product);
             return productBO;
         }
-        public ProductDetails PagintList(string term="",bool paging=false,int currentPage = 0, int? id=0)
+        public ProductDetails PagintList(int? id,string term="",bool paging=false,int currentPage = 0)
         {
             var data = new ProductDetails();
             var dataList = _ecommerceUnitOf.ProductRepository.GetAll(null, null, "Category,CoverType");
             var categoryList = _ecommerceUnitOf.CategoryRepository.GetAll();
             data.CategoryList = categoryList.ToList();
-            if (id == 0)
+            if (id !=null)
             {
-                data.ProductList = dataList.ToList();
+                dataList = dataList.Where(x => x.CategoryId == id).ToList();
             }
-            else
-            {
-                data.ProductList= dataList.Where(x=>x.CategoryId==id).ToList();
-            }
+           
             if (!string.IsNullOrEmpty(term))
             {
                 term = term.ToLower();

@@ -12,21 +12,17 @@
         </div>
     </form>
 </section>
-@* <div class="container">
+
+<div class="container">
     <div class="row justify-content-center m-2 p-2">
-        <div class="col-6 d-flex">
-            @if (Model != null && Model.CategoryList.Any())
-            {
-                foreach (var tag in Model.CategoryList)
-                {                  
-                    <a href="@Url.Action("IndexH","Home",new{id=tag.Id})" class="btn btn-outline-danger me-1 p-1">@tag.Name</a>
-                    <button class="btn btn-outline-danger me-1 p-1">@tag.Name</button>
-                }
-            }
+        <div class="col-6 d-flex">           
+                @foreach (var tag in Model.CategoryList)
+                {
+                    <a href="/Home/IndexH?id=@tag.Id" class="btn btn-outline-danger me-1 p-1">@tag.Name</a>
+                }           
         </div>
     </div>
-
-</div>  *@
+</div> 
 
 <div class="row pb-3 backgroundWhite">
     @foreach (var product in Model.ProductList)

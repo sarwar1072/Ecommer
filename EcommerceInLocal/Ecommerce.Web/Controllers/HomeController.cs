@@ -24,11 +24,12 @@ namespace Ecommerce.Web.Controllers
             _EcommerceUnit = EcommerceUnit;
             _logger = logger;
             _productServices = productServices;
-        }      
-        public IActionResult IndexH(string term="",int currentPage=1,int id=0)
+        }
+       // [HttpGet("{id?}")]
+        public IActionResult IndexH(int? id,string term="",int currentPage=1)
         {
            
-            var listOfProduct = _productServices.PagintList(term,true, currentPage, id);
+            var listOfProduct = _productServices.PagintList(id,term,true, currentPage);
             return View(listOfProduct);
         }
         public IActionResult Details(int productId)
