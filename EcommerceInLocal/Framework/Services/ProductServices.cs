@@ -87,10 +87,25 @@ namespace Framework.Services
             var productBO = _mapper.Map<ProductBO>(product);
             return productBO;
         }
-        public ProductDetails PagintList(bool paging=false,int currentPage = 0)
+        public ProductDetails PagintList(string term="",bool paging=false,int currentPage = 0, int? id=0)
         {
             var data = new ProductDetails();
             var dataList = _ecommerceUnitOf.ProductRepository.GetAll(null, null, "Category,CoverType");
+            var categoryList = _ecommerceUnitOf.CategoryRepository.GetAll();
+            data.CategoryList = categoryList.ToList();
+            if (id == 0)
+            {
+                data.ProductList = dataList.ToList();
+            }
+            else
+            {
+                data.ProductList= dataList.Where(x=>x.CategoryId==id).ToList();
+            }
+            if (!string.IsNullOrEmpty(term))
+            {
+                term = term.ToLower();
+                dataList = dataList.Where(a => a.Title.ToLower().StartsWith(term)).ToList();
+            }           
             if (paging)
             {
                 int pageSize = 3;
@@ -100,6 +115,18 @@ namespace Framework.Services
                 data.PageSize = pageSize;
                 data.CurrentPage = currentPage;
                 data.TotalPages = TotalPages;
+            }
+            data.ProductList = dataList.ToList();
+            return data;
+        }
+        public DisplayCategory DisplayList(string SearchCategory = "")
+        {
+            var data = new DisplayCategory();
+            var dataList = _ecommerceUnitOf.ProductRepository.GetAll(null, null, "Category,CoverType");
+            if ( !string.IsNullOrEmpty(SearchCategory))
+            {
+                SearchCategory = SearchCategory.ToLower();
+                dataList=dataList.Where(a=>a.Category.Name.ToLower().StartsWith(SearchCategory)).ToList();  
             }
             data.ProductList = dataList.AsQueryable();
             return data;

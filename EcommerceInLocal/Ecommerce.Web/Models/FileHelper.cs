@@ -13,6 +13,7 @@ namespace Ecommerce.Web.Models
     public class FileHelper : IFileHelper
     {
         private readonly IWebHostEnvironment _env;
+        //private readonly IHostingEnvironment hostingEnvironment;
 
         public FileHelper(IWebHostEnvironment env)
         {
@@ -26,7 +27,7 @@ namespace Ecommerce.Web.Models
             return strFileName;
         }
 
-        public string UploadFile(IFormFile file)
+        public  string UploadFile(IFormFile file)
         {
             var uploads = Path.Combine(_env.WebRootPath, "images");
             bool exists = Directory.Exists(uploads);

@@ -24,10 +24,8 @@ namespace Ecommerce.Web.Models.ProductModelFolder
        // [Required]
       //  [Range(1, 10000)]
         public double Price { get; set; }
-        public string ImageUrl { get; set; }
-
+        public string? ImageUrl { get; set; } 
         public IFormFile formFile { get; set; }
-
         public int CategoryId { get; set; }
         public int CoverTypeId { get; set; }
 

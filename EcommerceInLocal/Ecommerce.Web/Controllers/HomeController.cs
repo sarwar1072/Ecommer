@@ -9,9 +9,6 @@ using Microsoft.AspNetCore.Mvc;
 using Serilog.Configuration;
 using System.Diagnostics;
 using System.Security.Claims;
-using ProductBO = Framework.BusinessObj.Product;
-using Framework.ContextClass;
-//using Framework.Entity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Ecommerce.Web.Controllers
@@ -21,23 +18,17 @@ namespace Ecommerce.Web.Controllers
         private readonly ILogger<HomeController> _logger;
         private IProductServices _productServices;    
         private IEcommerceUnitOfWork _EcommerceUnit;
-        private ApplicationDbContext _context;
         public HomeController(IUserAccessor userAccessor,ILogger<HomeController> logger, IProductServices productServices, ILifetimeScope scope,
-            IEcommerceUnitOfWork EcommerceUnit,ApplicationDbContext context):base(scope, userAccessor)
+            IEcommerceUnitOfWork EcommerceUnit):base(scope, userAccessor)
         {
             _EcommerceUnit = EcommerceUnit;
             _logger = logger;
             _productServices = productServices;
-            _context = context;
         }      
-        public IActionResult IndexH(int currentPage=1)
+        public IActionResult IndexH(string term="",int currentPage=1,int id=0)
         {
-            //var model = _lifetimeScope.Resolve<ProductDetailsModel>();
-            //model.ListOfProduct();
-            // var exclude = (pagenumber * pageSize)-pageSize;
-            // var productList = _context.Products.Skip(exclude).Take(pageSize);
-            // IEnumerable<ProductBO> listOfProduct = _productServices.GetProductDetails().Skip(exclude).Take(pageSize);
-            var listOfProduct = _productServices.PagintList(true, currentPage);
+           
+            var listOfProduct = _productServices.PagintList(term,true, currentPage, id);
             return View(listOfProduct);
         }
         public IActionResult Details(int productId)
@@ -62,6 +53,7 @@ namespace Ecommerce.Web.Controllers
 
         public IActionResult Privacy()
         {
+
             return View();
         }
 

@@ -28,14 +28,16 @@ namespace Ecommerce.Web.Controllers
             var model = _scope.Resolve<CreateProduct>();
             return View(model);
         }
-        [HttpPost,ValidateAntiForgeryToken]
+        [HttpPost, ValidateAntiForgeryToken]
         public IActionResult Add(CreateProduct model)
         {
-            model.ResolveDependency(_scope);         
-          
-            model.ImageUrl = _fileHelper.UploadFile(model.formFile);   
+           
+            model.ResolveDependency(_scope);                 
+            if (ModelState.IsValid)
+            {
                 try
                 {
+                    model.ImageUrl = _fileHelper.UploadFile(model.formFile);
                     model.AddProduct();
                     ViewResponse("Success", ResponseType.Success);
                     return RedirectToAction(nameof(IndexP));
@@ -48,7 +50,8 @@ namespace Ecommerce.Web.Controllers
                 catch (Exception ex)
                 {
                     ViewResponse("Failure", ResponseType.Failure);
-                }
+                }             
+            }
             return View(model);
         }
         //[HttpGet]

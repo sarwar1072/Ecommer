@@ -1,8 +1,33 @@
 ﻿@model Framework.BusinessObj.ProductDetails
 @{
     ViewData["Title"] = "Home Page";
-    
 }
+<section class="search-bar">
+    <form method="get" asp-action="IndexH">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" name="term" placeholder="Write Book Name" aria-label="Search" aria-describedby="button-addon2">
+            <button class="btn btn-primary" type="submit" id="button-addon2">Button</button>
+            <a class="btn btn-danger p-1" href="/Home/IndexH">All</a>
+
+        </div>
+    </form>
+</section>
+@* <div class="container">
+    <div class="row justify-content-center m-2 p-2">
+        <div class="col-6 d-flex">
+            @if (Model != null && Model.CategoryList.Any())
+            {
+                foreach (var tag in Model.CategoryList)
+                {                  
+                    <a href="@Url.Action("IndexH","Home",new{id=tag.Id})" class="btn btn-outline-danger me-1 p-1">@tag.Name</a>
+                    <button class="btn btn-outline-danger me-1 p-1">@tag.Name</button>
+                }
+            }
+        </div>
+    </div>
+
+</div>  *@
+
 <div class="row pb-3 backgroundWhite">
     @foreach (var product in Model.ProductList)
     {
@@ -18,27 +43,26 @@
                         <div style="padding-left:5px;">
                             <p>List Price: <strike><b class="">$@product.Price.ToString("0.00")</b></strike></p>
                         </div>
-                      
+
                     </div>
                     <div>
-                        <a asp-action="Details" class="btn btn-primary form-control" asp-route-productId="@product.Id">Details</a>
+                      <a asp-action="Details" class="btn btn-primary form-control" asp-route-productId="@product.Id">Details</a>
                     </div>
                 </div>
             </div>
         </div>
     }
-    
 </div>
 <div class="pagination">
     @for (int i = 1; i <= Model.TotalPages; i++)
     {
         if (i == Model.CurrentPage)
         {
-            <a href="/Home/IndexH?currentPage=@i&term" class="active">@i</a>
+            <a href="/Home/IndexH?currentPage=@i&term=@Model.Term" class="active">@i</a>
         }
         else
         {
-            <a href="/Home/IndexH?currentPage=@i&term">@i</a>
+            <a href="/Home/IndexH?currentPage=@i&term=@Model.Term">@i</a>
         }
     }
 </div>

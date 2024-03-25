@@ -35,12 +35,12 @@ namespace Ecommerce.Web.Controllers
                         {
                             model.Add();
                             ViewResponse("Success", ResponseType.Success);
-                            return RedirectToAction(nameof(Index));
+                            return RedirectToAction(nameof(IndexC));
                         }
                         catch (DuplicationException ex)
                         {
                             ViewResponse("Duplicate", ResponseType.Duplicate);
-                            return RedirectToAction(nameof(Index));
+                            return RedirectToAction(nameof(IndexC));
                         }
                        catch (Exception ex)
                         {

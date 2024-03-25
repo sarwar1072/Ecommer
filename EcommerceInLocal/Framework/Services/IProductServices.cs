@@ -17,8 +17,9 @@ namespace Framework.Services
         IList<CoverBO> GetCoverTypes();
         IEnumerable<ProductBO> GetProductDetails();
         ProductBO GetOneProductDetails(int id);
+        DisplayCategory DisplayList(string SearchCategory = "");
         (IList<ProductBO> products, int total, int totalDisplay) GetProduct(int pageindex, int pagesize,
                                                                              string searchText, string orderBy);
-        ProductDetails PagintList(bool paging = false, int currentPage = 0);
+        ProductDetails PagintList(string term = "",bool paging = false, int currentPage = 0, int? id=0);
     }
 }
