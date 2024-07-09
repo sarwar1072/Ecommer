@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Autofac;
 using Ecommerce.Web.Models.CoverModelFolder;
 using Framework.Exceptions;
+using Ecommerce.Web.Models.SellerModel;
 
 namespace Ecommerce.Web.Controllers
 {
@@ -16,11 +17,44 @@ namespace Ecommerce.Web.Controllers
             var model = _scope.Resolve<CoverVM>();
             return View(model);
         }
+
+        public IActionResult AddSeller()
+        {
+            var model = _scope.Resolve<CreateSellerModel>();
+            return View(model);
+        }
+        [HttpPost,ValidateAntiForgeryToken]
+        public IActionResult AddSeller(CreateSellerModel model)
+        {
+            model.ResolveDependency(_scope);
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    model.AddSeller();
+                    model.Response = new ResponesModelTwo("created successfully", ResponseType.Success);
+                    return View(model);
+                }
+                catch (DuplicationException2 ex)
+                {
+                    model.Response = new ResponesModelTwo(ex.Message, ResponseType.Failure);
+                }
+                catch (Exception ex)
+                {
+                    model.Response = new ResponesModelTwo("failed! ", ResponseType.Failure);
+                }
+            }
+            return View(model);
+        }
+
+
         public IActionResult Add()
         {
             var model = _scope.Resolve<CreateCover>();
             return View(model);
         }
+
         [HttpPost, ValidateAntiForgeryToken]
         public IActionResult Add(CreateCover model)
         {

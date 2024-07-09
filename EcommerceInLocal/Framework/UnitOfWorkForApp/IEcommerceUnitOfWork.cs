@@ -14,6 +14,7 @@ namespace Framework.UnitOfWorkForApp
          ICoverRepository CoverRepository { get;  }
         IProductRepository ProductRepository {  get; }
          IShoppingCartRepository ShoppingCartRepository { get; }
+         ISellerRepository SellerRepository { get; }
 
 
     }

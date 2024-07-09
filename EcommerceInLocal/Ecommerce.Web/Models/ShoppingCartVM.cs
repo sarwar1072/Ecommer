@@ -11,8 +11,8 @@ namespace Ecommerce.Web.Models
     public class ShoppingCartVM:BaseModel
     {
         protected IShoppingCartServices _cartServices;
-        public ShoppingCartVM(IUserAccessor userAccessor, IShoppingCartServices cartServices, IMapper mapper,
-            IUserManagerAdapter<ApplicationUserEO> userManager) : base(mapper, userManager)
+        public ShoppingCartVM(IUserAccessor userAccessor, IShoppingCartServices cartServices, IMapper mapper,IHttpContextAccessor httpContextAccessor,
+            IUserManagerAdapter<ApplicationUserEO> userManager) : base(mapper,httpContextAccessor, userManager)
         {
             _cartServices = cartServices;
         }

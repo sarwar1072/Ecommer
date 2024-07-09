@@ -10,6 +10,7 @@ using Serilog.Configuration;
 using System.Diagnostics;
 using System.Security.Claims;
 using Microsoft.EntityFrameworkCore;
+using Autofac.Core.Lifetime;
 
 namespace Ecommerce.Web.Controllers
 {
@@ -28,15 +29,18 @@ namespace Ecommerce.Web.Controllers
        // [HttpGet("{id?}")]
         public IActionResult IndexH(int? id,string term="",int currentPage=1)
         {
-           
-            var listOfProduct = _productServices.PagintList(id,term,true, currentPage);
-            return View(listOfProduct);
+            var model = _scope.Resolve<ProductDetailsModel>();
+            model.ResolveDependency(_scope);
+
+             model.ListOfProduct(id,term,currentPage);
+            //var listOfProduct = _productServices.PagintList(id,term,true, currentPage);
+            return View(model);
         }
         public IActionResult Details(int productId)
         {
             var model = new ShoppingCartModel
             {
-                Product = _productServices.GetOneProductDetails(productId),
+                  Product = _productServices.GetOneProductDetails(productId),
                   Count = 1,
                   Id= productId
             };

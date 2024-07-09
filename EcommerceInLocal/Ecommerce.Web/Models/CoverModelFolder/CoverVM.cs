@@ -1,16 +1,34 @@
 ﻿using Autofac;
 using AutoMapper;
 using Framework.Services;
+using Membership.BusinessObj;
+using Membership.Services;
 using Microsoft.AspNetCore.Http;
 
 namespace Ecommerce.Web.Models.CoverModelFolder
 {
-    public class CoverVM: IDisposable
+    public class CoverVM: BaseModel
     {
         private ICoverService _coverService;
-        private IMapper _mapper;
-        private ILifetimeScope _lifetimeScope;
-        public CoverVM() { }     
+        //private IMapper _mapper;
+        //private ILifetimeScope _lifetimeScope;
+
+        public CoverVM(IMapper mapper, IHttpContextAccessor httpContextAccessor, ICoverService seller,
+           IUserManagerAdapter<ApplicationUser> userManager, ILifetimeScope lifetimeScope) :
+           base(mapper, httpContextAccessor, userManager)
+        {
+            _coverService = seller;
+        }
+        public CoverVM()
+        {
+
+        }
+        public override void ResolveDependency(ILifetimeScope lifetimeScope)
+        {
+            _lifetimeScope = lifetimeScope;
+            _mapper = _lifetimeScope.Resolve<IMapper>();
+            _coverService = _lifetimeScope.Resolve<ICoverService>();
+        }
         public CoverVM(ICoverService coverService, IMapper mapper) 
         {
             _coverService = coverService; 
@@ -21,11 +39,11 @@ namespace Ecommerce.Web.Models.CoverModelFolder
             _coverService.Dispose();
         }
 
-        public  void ResolveDependency(ILifetimeScope lifetimeScope)
-        {
-            _lifetimeScope = lifetimeScope;
-            _coverService=_lifetimeScope.Resolve<ICoverService>();
-        }
+        //public  void ResolveDependency(ILifetimeScope lifetimeScope)
+        //{
+        //    _lifetimeScope = lifetimeScope;
+        //    _coverService=_lifetimeScope.Resolve<ICoverService>();
+        //}
 
         internal object GetCover(DataTablesAjaxRequestModel dataTables)
         {

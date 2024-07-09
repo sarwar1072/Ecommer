@@ -1,4 +1,4 @@
-﻿@model Framework.BusinessObj.ProductDetails
+﻿@model ProductDetailsModel
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -49,6 +49,8 @@
         </div>
     }
 </div>
+
+
 <div class="pagination">
     @for (int i = 1; i <= Model.TotalPages; i++)
     {

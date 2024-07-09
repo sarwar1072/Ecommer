@@ -32,11 +32,9 @@ namespace Ecommerce.Web.Models
             Message = message;
         }
 
-        //public void ResolveDependency(ILifetimeScope lifetimeScope)
-        //{
-        //    _scope = lifetimeScope;
-        //   // _services = _scope.Resolve<IProductServices>();
-            
-        //}
+        public void ResolveDependency(ILifetimeScope lifetimeScope)
+        {
+            _scope = lifetimeScope;
+        }
     }
 }

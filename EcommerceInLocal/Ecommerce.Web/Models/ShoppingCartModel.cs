@@ -14,8 +14,8 @@ namespace Ecommerce.Web.Models
         protected IShoppingCartServices _cartServices;
         protected IUserAccessor _userAccessor;
 
-        public ShoppingCartModel(IUserAccessor userAccessor,IShoppingCartServices cartServices, IMapper mapper,
-            IUserManagerAdapter<ApplicationUser> userManager):base(mapper, userManager)
+        public ShoppingCartModel(IUserAccessor userAccessor,IShoppingCartServices cartServices, IMapper mapper,IHttpContextAccessor httpContextAccessor,
+            IUserManagerAdapter<ApplicationUser> userManager):base(mapper,httpContextAccessor, userManager)
         {
             _userAccessor = userAccessor;
               _cartServices = cartServices; 
@@ -30,7 +30,7 @@ namespace Ecommerce.Web.Models
         public Product Product { get; set; }
         public int ProductId { get; set; }
         public Guid ApplicationUserId { get; set; }
-       public ApplicationUser ApplicationUser { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
         public int Count { get; set; }
         public ShoppingCartModel()
         {

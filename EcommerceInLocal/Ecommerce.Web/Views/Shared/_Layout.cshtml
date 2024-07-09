@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@model BaseModel
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -75,14 +76,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script src="https://kit.fontawesome.com/e19c476714.js"></script>
 
-
     @RenderSection("PageScript", false)
 
     <script src="~/js/site.js" asp-append-version="true"></script>
 
-  @*   <partial name="_ToasterMessage" model="@Model.response2" /> *@
+    <partial name="_ToasterMessage" model="@Model.Response" />
     
- 
    <script>
         $(function () {
 

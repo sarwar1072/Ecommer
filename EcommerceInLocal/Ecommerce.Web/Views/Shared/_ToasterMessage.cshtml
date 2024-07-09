@@ -1,8 +1,8 @@
-﻿@* @model ResponseModel
+﻿@model ResponesModelTwo
 
 @if (Model != null)
 {
-    if (Model.Type == "success")
+    if (Model.ToasterClass == "success")
     {
         <script>
             $(function () {
@@ -18,4 +18,5 @@
             });
         </script>
     }
-} *@
+
+}

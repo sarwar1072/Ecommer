@@ -75,15 +75,16 @@ namespace Ecommerce.Web
             .AddDefaultTokenProviders();
 
             //for session 
-            builder.Services.AddDistributedMemoryCache();
-            builder.Services.AddSession(options =>
-            {
-                // Set a short timeout for easy testing.
-                options.IdleTimeout = TimeSpan.FromMinutes(40);
-                options.Cookie.HttpOnly = true;
-                // Make the session cookie essential
-                options.Cookie.IsEssential = true;
-            });
+           // builder.Services.AddDistributedMemoryCache();
+            builder.Services.AddSession(//options =>
+            //{
+            //    // Set a short timeout for easy testing.
+            //    options.IdleTimeout = TimeSpan.FromMinutes(40);
+            //    options.Cookie.HttpOnly = true;
+            //    // Make the session cookie essential
+            //    options.Cookie.IsEssential = true;
+            //}
+            );
             //for session 
             builder.Services.Configure<IdentityOptions>(options =>
             {
@@ -115,6 +116,7 @@ namespace Ecommerce.Web
                 options.AccessDeniedPath = "/Account/Login";
                 options.SlidingExpiration = true;
             });
+            //builder.Services.AddSingleton<IHttpContextAccessor, IHttpContextAccessor>();
             var app = builder.Build();
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
@@ -141,8 +143,15 @@ namespace Ecommerce.Web
             app.MapControllerRoute(
                 name: "default",
                 pattern: "/{controller=Home}/{action=IndexH}/{id?}");
-           
-            app.Run();
+
+            //app.Run(async context =>
+            //{
+            //    // Access HttpContext here
+            //    var httpContext = context.Request.HttpContext;
+            //    // ...
+            //});
+
+           app.Run();
         }
     }
 }

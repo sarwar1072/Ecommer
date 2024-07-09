@@ -47,6 +47,8 @@ namespace Framework
             builder.RegisterType<OrderServices>().As<IOrderServices>().InstancePerLifetimeScope();  
             builder.RegisterType<OrderDetailsRepository>().As<IOrderDetailsRepository>().InstancePerLifetimeScope();
             builder.RegisterType<OrderHeaderRepository>().As<IOrderHeaderRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<SellerRepository>().As<ISellerRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<SellerServices>().As<ISellerServices>().InstancePerLifetimeScope();
 
             base.Load(builder);
         }

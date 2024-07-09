@@ -3,6 +3,7 @@ using Ecommerce.Web.Models;
 using Ecommerce.Web.Models.CategoryModelFolder;
 using Ecommerce.Web.Models.CoverModelFolder;
 using Ecommerce.Web.Models.ProductModelFolder;
+using Ecommerce.Web.Models.SellerModel;
 using Framework.Services;
 
 namespace Ecommerce.Web
@@ -30,6 +31,8 @@ namespace Ecommerce.Web
             builder.RegisterType<ResponseModel>()
                 .AsSelf()
                 .InstancePerLifetimeScope();
+
+            builder.RegisterType<CreateSellerModel>().AsSelf().InstancePerLifetimeScope();
 
             builder.RegisterType<DashboardModel>()
                 .AsSelf()
@@ -61,12 +64,11 @@ namespace Ecommerce.Web
             builder.RegisterType<ProductDetailsModel>().AsSelf();
             builder.RegisterType<ShoppingCartModel>().AsSelf();
             builder.RegisterType<UserAccessor>().As<IUserAccessor>().InstancePerLifetimeScope();
-
             builder.RegisterType<HttpContextAccessor>().As<IHttpContextAccessor>().InstancePerLifetimeScope();
             builder.RegisterType<FileHelper>().As<IFileHelper>().InstancePerLifetimeScope();
-            builder.RegisterType<BaseModel>()
-                .AsSelf()
-                .InstancePerLifetimeScope();
+            //builder.RegisterType<BaseModel>()
+            //    .AsSelf()
+            //    .InstancePerLifetimeScope();
             builder.RegisterType<ShoppingCartVM>().AsSelf();  
             base.Load(builder);
         }

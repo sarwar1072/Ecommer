@@ -15,16 +15,19 @@ namespace Framework.UnitOfWorkForApp
         public ICoverRepository CoverRepository {  get; private set; } 
         public IProductRepository ProductRepository { get; private set; }  
         public IShoppingCartRepository ShoppingCartRepository { get; private set; } 
+        public ISellerRepository SellerRepository { get; private set; } 
         public EcommerceUnitOfWork(ApplicationDbContext dbContext, 
             ICategoryRepository categoryRepository,
             ICoverRepository coverRepository,
             IProductRepository productRepository,
-            IShoppingCartRepository shoppingCartRepository) :base(dbContext)
+            IShoppingCartRepository shoppingCartRepository,
+            ISellerRepository sellerRepository) :base(dbContext)
         {
             CategoryRepository = categoryRepository;
             CoverRepository = coverRepository;
             ProductRepository = productRepository;
             ShoppingCartRepository = shoppingCartRepository;
+            SellerRepository = sellerRepository;    
         }
     }
 }

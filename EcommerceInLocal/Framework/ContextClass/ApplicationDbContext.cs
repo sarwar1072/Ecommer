@@ -59,6 +59,7 @@ namespace Framework.ContextClass
         public DbSet<ShoppingCart>? ShoppingCarts { get; set; }
         public DbSet<OrderDetails>? OrderDetails { get; set; }  
         public DbSet<OrderHeader>? orderHeaders { get; set; }
+        public DbSet<Seller>? Sellers { get; set; } 
         
     }
 }
